@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/:match*",
+      "destination": "https://home-risk-prediction.onrender.com/api/:match*"
+    }
+  ]
+}

@@ -1,9 +1,22 @@
 /**
  * app.js - Client-side controller for Home Credit Risk Tool (GCI Global 2025)
+ * Supports both Local Flask server and Vercel static deployment (proxied to Render backend).
  */
+
+const RENDER_BACKEND_URL = 'https://home-risk-prediction.onrender.com';
 
 let debounceTimer = null;
 let currentApplicantId = null;
+
+// Determine base API url
+function getApiUrl(path) {
+  // If running locally, use relative path
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    return path;
+  }
+  // On Vercel, relative path /api/... is automatically routed via vercel.json rewrites.
+  return path;
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   bindFormEvents();
@@ -11,11 +24,34 @@ document.addEventListener('DOMContentLoaded', () => {
   setupApplicantSearch();
   setupPresets();
   setupMoreOptionsToggle();
+  checkBackendHealth();
   
   // Initial calculation on page load
   runPrediction();
   if (window.lucide) lucide.createIcons();
 });
+
+async function checkBackendHealth() {
+  const badgeEl = document.getElementById('backend-status-badge');
+  try {
+    const resp = await fetch(getApiUrl('/api/health'));
+    if (resp.ok) {
+      if (badgeEl) {
+        badgeEl.className = 'inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200';
+        badgeEl.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> API Online';
+      }
+    } else {
+      throw new Error('API warming up');
+    }
+  } catch (err) {
+    if (badgeEl) {
+      badgeEl.className = 'inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-medium bg-amber-50 text-amber-700 border border-amber-200';
+      badgeEl.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span> Waking API (~30s)...';
+      // Retry in 10s
+      setTimeout(checkBackendHealth, 10000);
+    }
+  }
+}
 
 function bindFormEvents() {
   const inputs = document.querySelectorAll('.watch-input');
@@ -172,7 +208,7 @@ function triggerDebouncedPrediction() {
 async function runPrediction() {
   const payload = getFormData();
   try {
-    const resp = await fetch('/api/predict', {
+    const resp = await fetch(getApiUrl('/api/predict'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -253,7 +289,7 @@ function setupApplicantSearch() {
     if (!id) return;
     try {
       searchBtn.textContent = 'Searching...';
-      const resp = await fetch(`/api/applicant/${id}`);
+      const resp = await fetch(getApiUrl(`/api/applicant/${id}`));
       if (!resp.ok) {
         alert(`Applicant ID ${id} not found in input/test.csv.`);
         return;
@@ -335,7 +371,7 @@ function hideSubmissionComparison() {
 
 async function loadSubmissions() {
   try {
-    const resp = await fetch('/api/submissions');
+    const resp = await fetch(getApiUrl('/api/submissions'));
     if (!resp.ok) return;
     const data = await resp.json();
     const tbody = document.getElementById('submissions-tbody');
@@ -355,7 +391,7 @@ async function loadSubmissions() {
         <td class="mono-num text-xs font-semibold text-slate-800">${s.mean_pct}%</td>
         <td class="mono-num text-xs text-slate-600">${s.median_pct}%</td>
         <td>
-          <a href="/api/download-submission?name=${s.filename}" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center gap-1">
+          <a href="${getApiUrl('/api/download-submission?name=' + s.filename)}" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center gap-1">
             Download CSV &rarr;
           </a>
         </td>
