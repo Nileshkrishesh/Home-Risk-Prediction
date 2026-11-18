@@ -1,0 +1,18 @@
+import os
+import sys
+
+# Ensure matplotlib does not cause memory issues on server instances
+os.environ.setdefault('MPLCONFIGDIR', os.environ.get('TEMP', '/tmp'))
+if 'matplotlib' not in sys.modules:
+    sys.modules['matplotlib'] = None
+
+# Ensure root directory is on the Python path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
+
+from backend.app import app
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

@@ -51,17 +51,20 @@ class RiskPredictor:
             else:
                 df.loc[0, "OWN_CAR_AGE_GROUP"] = val // 10
         else:
+            df["OWN_CAR_AGE"] = np.nan
             df["OWN_CAR_AGE_GROUP"] = np.nan
 
         if "CNT_CHILDREN" in df.columns and pd.notna(df["CNT_CHILDREN"].iloc[0]):
             if float(df["CNT_CHILDREN"].iloc[0]) >= 6:
                 df.loc[0, "CNT_CHILDREN"] = np.nan
+        else:
+            df["CNT_CHILDREN"] = np.nan
 
         # Financial ratios
         income = float(df["AMT_INCOME_TOTAL"].iloc[0]) if "AMT_INCOME_TOTAL" in df and pd.notna(df["AMT_INCOME_TOTAL"].iloc[0]) else np.nan
         credit = float(df["AMT_CREDIT"].iloc[0]) if "AMT_CREDIT" in df and pd.notna(df["AMT_CREDIT"].iloc[0]) else np.nan
         annuity = float(df["AMT_ANNUITY"].iloc[0]) if "AMT_ANNUITY" in df and pd.notna(df["AMT_ANNUITY"].iloc[0]) else np.nan
-        goods = float(df["AMT_GOODS_PRICE"].iloc[0]) if "AMT_GOODS_PRICE" in df and pd.notna(df["AMT_GOODS_PRICE"].iloc[0]) else np.nan
+        goods = float(df["AMT_GOODS_PRICE"].iloc[0]) if "AMT_GOODS_PRICE" in df and pd.notna(df["AMT_GOODS_PRICE"].iloc[0]) else credit
 
         df["LOG_AMT_INCOME_TOTAL"] = np.log1p(income) if pd.notna(income) and income > 0 else np.nan
         
@@ -73,7 +76,7 @@ class RiskPredictor:
         df["ANNUITY_INCOME_RATIO"] = (annuity / income) if pd.notna(annuity) and pd.notna(income) and income > 0 else np.nan
         df["CREDIT_TERM"] = (credit / annuity) if pd.notna(credit) and pd.notna(annuity) and annuity > 0 else np.nan
         df["CREDIT_INCOME_RATIO"] = (credit / income) if pd.notna(credit) and pd.notna(income) and income > 0 else np.nan
-        df["GOODS_CREDIT_RATIO"] = (goods / credit) if pd.notna(goods) and pd.notna(credit) and credit > 0 else np.nan
+        df["GOODS_CREDIT_RATIO"] = (goods / credit) if pd.notna(goods) and pd.notna(credit) and credit > 0 else 1.0
 
         if "DAYS_BIRTH" in df and pd.notna(df["DAYS_BIRTH"].iloc[0]):
             df["AGE_YEARS"] = -float(df["DAYS_BIRTH"].iloc[0]) / 365.25
@@ -95,15 +98,18 @@ class RiskPredictor:
         b_sum = sum(float(df[c].iloc[0]) for c in bureau_cols if c in df and pd.notna(df[c].iloc[0]))
         df["BUREAU_ENQUIRIES_TOTAL"] = b_sum
 
-        # Categoricals
-        for cat_col in self.metadata.get("categorical_columns", []):
-            if cat_col in df:
-                df[cat_col] = df[cat_col].astype("category")
-
+        # Ensure all model feature columns exist
         feature_names = self.metadata.get("feature_names", [])
         for f in feature_names:
             if f not in df.columns:
                 df[f] = np.nan
+
+        # Categoricals: Ensure exact pandas Categorical dtype matching training metadata
+        cat_cols = self.metadata.get("categorical_columns", [])
+        cat_opts = self.metadata.get("categorical_options", {})
+        for cat_col in cat_cols:
+            opts = cat_opts.get(cat_col, [])
+            df[cat_col] = pd.Categorical(df[cat_col], categories=opts)
                 
         return df[feature_names]
 
@@ -120,18 +126,18 @@ class RiskPredictor:
         if prob < 0.08:
             tier = "Low Risk"
             badge = "low"
-            recommendation = "Approved - Prime Terms"
-            rec_desc = "Low default risk. Eligible for standard or prime rates."
+            recommendation = "Approved (Standard/Prime)"
+            rec_desc = "Low statistical default risk. Candidate meets standard approval criteria."
         elif prob < 0.15:
             tier = "Moderate Risk"
             badge = "moderate"
-            recommendation = "Approved - Standard Terms"
-            rec_desc = "Moderate default risk aligned with market averages."
+            recommendation = "Approved (Standard Terms)"
+            rec_desc = "Moderate risk aligned with market baseline."
         elif prob < 0.25:
             tier = "Elevated Risk"
             badge = "elevated"
             recommendation = "Manual Review / Conditional"
-            rec_desc = "Above-average default indicator. Requires secondary review or co-signer."
+            rec_desc = "Above-average default indicator. Secondary documentation or co-signer recommended."
         else:
             tier = "High Risk"
             badge = "high"
@@ -170,28 +176,28 @@ class RiskPredictor:
                 positive_factors.append({
                     "factor": "External Bureau Rating",
                     "value": f"{ext_mean:.3f}",
-                    "impact": "Score is well above the median for default cases (0.40)"
+                    "impact": "Score is above average borrower benchmark (0.50)"
                 })
             elif ext_mean < 0.40:
                 risk_drivers.append({
                     "factor": "Low External Bureau Rating",
                     "value": f"{ext_mean:.3f}",
-                    "impact": "Score falls below the safe borrower benchmark (0.50+)"
+                    "impact": "Score falls below benchmark"
                 })
 
         dti = processed_df["ANNUITY_INCOME_RATIO"].iloc[0]
         if pd.notna(dti):
             if dti > 0.25:
                 risk_drivers.append({
-                    "factor": "High Debt Burden (Annuity / Income)",
+                    "factor": "High Debt-to-Income",
                     "value": f"{dti*100:.1f}%",
-                    "impact": "Monthly payment represents an elevated share of income"
+                    "impact": "Payment represents an elevated share of income"
                 })
             elif dti < 0.15:
                 positive_factors.append({
                     "factor": "Comfortable Payment Coverage",
                     "value": f"{dti*100:.1f}%",
-                    "impact": "Loan annuity is under 15% of annual income"
+                    "impact": "Annuity is under 15% of annual income"
                 })
 
         emp_years = processed_df["EMPLOYED_YEARS"].iloc[0]
@@ -199,13 +205,13 @@ class RiskPredictor:
             if emp_years >= 5:
                 positive_factors.append({
                     "factor": "Employment Stability",
-                    "value": f"{emp_years:.1f} years",
-                    "impact": "Long tenure at current job (> 5 years)"
+                    "value": f"{emp_years:.1f} yrs",
+                    "impact": "Over 5 years in current employment"
                 })
             elif emp_years < 1:
                 risk_drivers.append({
                     "factor": "Short Employment Tenure",
-                    "value": f"{emp_years:.1f} years",
+                    "value": f"{emp_years:.1f} yrs",
                     "impact": "Under 1 year in current role"
                 })
 
@@ -213,43 +219,43 @@ class RiskPredictor:
         if pd.notna(age):
             if age >= 45:
                 positive_factors.append({
-                    "factor": "Applicant Age Bracket",
+                    "factor": "Borrower Age",
                     "value": f"{age:.1f} yrs",
-                    "impact": "Borrowers aged 45+ historically exhibit lower default rates"
+                    "impact": "Older demographic historically exhibits lower default rates"
                 })
             elif age < 28:
                 risk_drivers.append({
-                    "factor": "Early Career Borrower",
+                    "factor": "Young Borrower",
                     "value": f"{age:.1f} yrs",
-                    "impact": "Borrowers under 28 show higher statistical default rates"
+                    "impact": "Younger applicants show higher statistical default rates"
                 })
 
         b_enquiries = processed_df["BUREAU_ENQUIRIES_TOTAL"].iloc[0]
-        if pd.notna(b_enquiries):
-            if b_enquiries > 5:
+        if pd.notna(b_enquiries) and b_enquiries > 0:
+            if b_enquiries > 4:
                 risk_drivers.append({
-                    "factor": "Recent Credit Inquiries",
-                    "value": f"{int(b_enquiries)} checks",
-                    "impact": "Multiple credit bureau checks over the past year"
+                    "factor": "Credit Inquiries",
+                    "value": f"{int(b_enquiries)}",
+                    "impact": "Multiple credit checks over the past year"
                 })
             elif b_enquiries <= 1:
                 positive_factors.append({
-                    "factor": "Minimal Credit Inquiries",
-                    "value": f"{int(b_enquiries)} checks",
-                    "impact": "Clean inquiry history over recent quarters"
+                    "factor": "Credit Inquiries",
+                    "value": f"{int(b_enquiries)}",
+                    "impact": "Minimal recent inquiries"
                 })
 
         if not positive_factors:
             positive_factors.append({
-                "factor": "Standard Application Parameters",
+                "factor": "Standard Criteria",
                 "value": "Eligible",
                 "impact": "Meets baseline criteria"
             })
         if not risk_drivers:
             risk_drivers.append({
-                "factor": "No Severe Negative Flags",
+                "factor": "No Critical Flags",
                 "value": "Clean",
-                "impact": "No critical risk triggers detected"
+                "impact": "No severe risk triggers detected"
             })
 
         return {
