@@ -1,0 +1,146 @@
+{
+  "summary": {
+    "total_applicants": 171202,
+    "defaulters": 13821,
+    "repayers": 157381,
+    "overall_default_rate_pct": 8.07
+  },
+  "by_education": [
+    {
+      "category": "Lower secondary",
+      "count": 2133,
+      "default_rate": 11.06
+    },
+    {
+      "category": "Secondary / secondary special",
+      "count": 121612,
+      "default_rate": 8.92
+    },
+    {
+      "category": "Incomplete higher",
+      "count": 5711,
+      "default_rate": 8.72
+    },
+    {
+      "category": "Higher education",
+      "count": 41645,
+      "default_rate": 5.37
+    },
+    {
+      "category": "Academic degree",
+      "count": 101,
+      "default_rate": 0.99
+    }
+  ],
+  "by_income_type": [
+    {
+      "category": "Working",
+      "count": 88268,
+      "default_rate": 9.55
+    },
+    {
+      "category": "Commercial associate",
+      "count": 40007,
+      "default_rate": 7.52
+    },
+    {
+      "category": "State servant",
+      "count": 12007,
+      "default_rate": 5.89
+    },
+    {
+      "category": "Pensioner",
+      "count": 30895,
+      "default_rate": 5.42
+    }
+  ],
+  "by_gender": [
+    {
+      "category": "M",
+      "count": 58649,
+      "default_rate": 10.13
+    },
+    {
+      "category": "F",
+      "count": 112549,
+      "default_rate": 7.0
+    }
+  ],
+  "by_contract": [
+    {
+      "category": "Cash loans",
+      "count": 154988,
+      "default_rate": 8.34
+    },
+    {
+      "category": "Revolving loans",
+      "count": 16214,
+      "default_rate": 5.55
+    }
+  ],
+  "by_age": [
+    {
+      "category": "20-29",
+      "count": 27298,
+      "default_rate": 11.52
+    },
+    {
+      "category": "30-39",
+      "count": 45985,
+      "default_rate": 9.42
+    },
+    {
+      "category": "40-49",
+      "count": 42084,
+      "default_rate": 7.6
+    },
+    {
+      "category": "50-59",
+      "count": 37909,
+      "default_rate": 6.01
+    },
+    {
+      "category": "60+",
+      "count": 17926,
+      "default_rate": 4.84
+    }
+  ],
+  "ext2_distribution": {
+    "labels": [
+      "0.0-0.1",
+      "0.1-0.2",
+      "0.2-0.3",
+      "0.3-0.4",
+      "0.4-0.5",
+      "0.5-0.6",
+      "0.6-0.7",
+      "0.7-0.8",
+      "0.8-0.9",
+      "0.9-1.0"
+    ],
+    "repayers": [
+      3.1,
+      5.0,
+      7.3,
+      8.6,
+      12.2,
+      20.0,
+      27.6,
+      16.0,
+      0.2,
+      0.0
+    ],
+    "defaulters": [
+      10.8,
+      10.5,
+      12.0,
+      12.2,
+      13.2,
+      17.7,
+      17.5,
+      6.1,
+      0.0,
+      0.0
+    ]
+  }
+}

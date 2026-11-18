@@ -1,0 +1,513 @@
+{
+  "model_type": "LightGBM Classifier",
+  "validation_auc": 0.75545,
+  "brier_score": 0.06799,
+  "log_loss": 0.24683,
+  "training_samples": 136961,
+  "validation_samples": 34241,
+  "num_features": 44,
+  "feature_names": [
+    "NAME_CONTRACT_TYPE",
+    "CODE_GENDER",
+    "CNT_CHILDREN",
+    "AMT_INCOME_TOTAL",
+    "AMT_CREDIT",
+    "AMT_ANNUITY",
+    "AMT_GOODS_PRICE",
+    "NAME_INCOME_TYPE",
+    "NAME_EDUCATION_TYPE",
+    "NAME_FAMILY_STATUS",
+    "NAME_HOUSING_TYPE",
+    "REGION_POPULATION_RELATIVE",
+    "DAYS_BIRTH",
+    "DAYS_EMPLOYED",
+    "DAYS_REGISTRATION",
+    "DAYS_ID_PUBLISH",
+    "OWN_CAR_AGE",
+    "FLAG_MOBIL",
+    "FLAG_EMP_PHONE",
+    "FLAG_WORK_PHONE",
+    "OCCUPATION_TYPE",
+    "CNT_FAM_MEMBERS",
+    "REGION_RATING_CLIENT",
+    "ORGANIZATION_TYPE",
+    "EXT_SOURCE_1",
+    "EXT_SOURCE_2",
+    "EXT_SOURCE_3",
+    "DAYS_LAST_PHONE_CHANGE",
+    "AMT_REQ_CREDIT_BUREAU_HOUR",
+    "AMT_REQ_CREDIT_BUREAU_MON",
+    "AMT_REQ_CREDIT_BUREAU_QRT",
+    "AMT_REQ_CREDIT_BUREAU_YEAR",
+    "OWN_CAR_AGE_GROUP",
+    "LOG_AMT_INCOME_TOTAL",
+    "EXT_MEAN",
+    "EXT_STD",
+    "ANNUITY_INCOME_RATIO",
+    "CREDIT_TERM",
+    "CREDIT_INCOME_RATIO",
+    "GOODS_CREDIT_RATIO",
+    "AGE_YEARS",
+    "EMPLOYED_YEARS",
+    "EMPLOYED_TO_AGE_RATIO",
+    "BUREAU_ENQUIRIES_TOTAL"
+  ],
+  "categorical_columns": [
+    "NAME_CONTRACT_TYPE",
+    "CODE_GENDER",
+    "NAME_INCOME_TYPE",
+    "NAME_EDUCATION_TYPE",
+    "NAME_FAMILY_STATUS",
+    "NAME_HOUSING_TYPE",
+    "OCCUPATION_TYPE",
+    "ORGANIZATION_TYPE"
+  ],
+  "categorical_options": {
+    "NAME_CONTRACT_TYPE": [
+      "Cash loans",
+      "Revolving loans"
+    ],
+    "CODE_GENDER": [
+      "F",
+      "M",
+      "XNA"
+    ],
+    "NAME_INCOME_TYPE": [
+      "Businessman",
+      "Commercial associate",
+      "Maternity leave",
+      "Pensioner",
+      "State servant",
+      "Student",
+      "Unemployed",
+      "Working"
+    ],
+    "NAME_EDUCATION_TYPE": [
+      "Academic degree",
+      "Higher education",
+      "Incomplete higher",
+      "Lower secondary",
+      "Secondary / secondary special"
+    ],
+    "NAME_FAMILY_STATUS": [
+      "Civil marriage",
+      "Married",
+      "Separated",
+      "Single / not married",
+      "Unknown",
+      "Widow"
+    ],
+    "NAME_HOUSING_TYPE": [
+      "Co-op apartment",
+      "House / apartment",
+      "Municipal apartment",
+      "Office apartment",
+      "Rented apartment",
+      "With parents"
+    ],
+    "OCCUPATION_TYPE": [
+      "Accountants",
+      "Cleaning staff",
+      "Cooking staff",
+      "Core staff",
+      "Drivers",
+      "HR staff",
+      "High skill tech staff",
+      "IT staff",
+      "Laborers",
+      "Low-skill Laborers",
+      "Managers",
+      "Medicine staff",
+      "Other",
+      "Private service staff",
+      "Realty agents",
+      "Sales staff",
+      "Secretaries",
+      "Security staff",
+      "Waiters/barmen staff"
+    ],
+    "ORGANIZATION_TYPE": [
+      "Advertising",
+      "Agriculture",
+      "Bank",
+      "Business Entity Type 1",
+      "Business Entity Type 2",
+      "Business Entity Type 3",
+      "Cleaning",
+      "Construction",
+      "Culture",
+      "Electricity",
+      "Emergency",
+      "Government",
+      "Hotel",
+      "Housing",
+      "Industry: type 1",
+      "Industry: type 10",
+      "Industry: type 11",
+      "Industry: type 12",
+      "Industry: type 13",
+      "Industry: type 2",
+      "Industry: type 3",
+      "Industry: type 4",
+      "Industry: type 5",
+      "Industry: type 6",
+      "Industry: type 7",
+      "Industry: type 8",
+      "Industry: type 9",
+      "Insurance",
+      "Kindergarten",
+      "Legal Services",
+      "Medicine",
+      "Military",
+      "Mobile",
+      "Other",
+      "Police",
+      "Postal",
+      "Realtor",
+      "Religion",
+      "Restaurant",
+      "School",
+      "Security",
+      "Security Ministries",
+      "Self-employed",
+      "Services",
+      "Telecom",
+      "Trade: type 1",
+      "Trade: type 2",
+      "Trade: type 3",
+      "Trade: type 4",
+      "Trade: type 5",
+      "Trade: type 6",
+      "Trade: type 7",
+      "Transport: type 1",
+      "Transport: type 2",
+      "Transport: type 3",
+      "Transport: type 4",
+      "University",
+      "XNA"
+    ]
+  },
+  "feature_importances": [
+    {
+      "feature": "EXT_MEAN",
+      "importance": 66023.09589948319
+    },
+    {
+      "feature": "ORGANIZATION_TYPE",
+      "importance": 16812.84716796875
+    },
+    {
+      "feature": "CREDIT_TERM",
+      "importance": 16514.59178876877
+    },
+    {
+      "feature": "EXT_SOURCE_3",
+      "importance": 11427.302044657205
+    },
+    {
+      "feature": "EXT_SOURCE_2",
+      "importance": 11196.627229778096
+    },
+    {
+      "feature": "GOODS_CREDIT_RATIO",
+      "importance": 8135.513382315636
+    },
+    {
+      "feature": "OCCUPATION_TYPE",
+      "importance": 5813.936674594879
+    },
+    {
+      "feature": "EMPLOYED_YEARS",
+      "importance": 5676.7768523693085
+    },
+    {
+      "feature": "EXT_STD",
+      "importance": 5645.529862105846
+    },
+    {
+      "feature": "DAYS_ID_PUBLISH",
+      "importance": 4521.996261835098
+    },
+    {
+      "feature": "EXT_SOURCE_1",
+      "importance": 4512.796496748924
+    },
+    {
+      "feature": "DAYS_REGISTRATION",
+      "importance": 4046.7390116155148
+    },
+    {
+      "feature": "DAYS_LAST_PHONE_CHANGE",
+      "importance": 3989.6036492586136
+    },
+    {
+      "feature": "AMT_GOODS_PRICE",
+      "importance": 3888.9265278577805
+    },
+    {
+      "feature": "AMT_ANNUITY",
+      "importance": 3613.3089468479156
+    },
+    {
+      "feature": "DAYS_BIRTH",
+      "importance": 3452.0843296051025
+    },
+    {
+      "feature": "OWN_CAR_AGE",
+      "importance": 3365.074810028076
+    },
+    {
+      "feature": "CREDIT_INCOME_RATIO",
+      "importance": 3267.9089320898056
+    },
+    {
+      "feature": "EMPLOYED_TO_AGE_RATIO",
+      "importance": 3245.841532945633
+    },
+    {
+      "feature": "AGE_YEARS",
+      "importance": 3148.3272424936295
+    },
+    {
+      "feature": "ANNUITY_INCOME_RATIO",
+      "importance": 2940.435845851898
+    },
+    {
+      "feature": "AMT_CREDIT",
+      "importance": 2902.869894862175
+    },
+    {
+      "feature": "REGION_POPULATION_RELATIVE",
+      "importance": 2477.9468586444855
+    },
+    {
+      "feature": "NAME_EDUCATION_TYPE",
+      "importance": 2234.7083230018616
+    },
+    {
+      "feature": "CODE_GENDER",
+      "importance": 2044.630862236023
+    },
+    {
+      "feature": "AMT_INCOME_TOTAL",
+      "importance": 1816.1081614494324
+    },
+    {
+      "feature": "AMT_REQ_CREDIT_BUREAU_YEAR",
+      "importance": 1677.9916038513184
+    },
+    {
+      "feature": "DAYS_EMPLOYED",
+      "importance": 1327.5340194702148
+    },
+    {
+      "feature": "NAME_CONTRACT_TYPE",
+      "importance": 1134.8646342754364
+    },
+    {
+      "feature": "NAME_FAMILY_STATUS",
+      "importance": 1073.2825076580048
+    }
+  ],
+  "stats_summary": {
+    "AMT_INCOME_TOTAL": {
+      "overall_median": 146250.0,
+      "non_defaulter_median": 148500.0,
+      "defaulter_median": 135000.0
+    },
+    "AMT_CREDIT": {
+      "overall_median": 514602.0,
+      "non_defaulter_median": 518562.0,
+      "defaulter_median": 495000.0
+    },
+    "AMT_ANNUITY": {
+      "overall_median": 24916.5,
+      "non_defaulter_median": 24894.0,
+      "defaulter_median": 25204.5
+    },
+    "EXT_SOURCE_1": {
+      "overall_median": 0.5059,
+      "non_defaulter_median": 0.5174,
+      "defaulter_median": 0.3615
+    },
+    "EXT_SOURCE_2": {
+      "overall_median": 0.5663,
+      "non_defaulter_median": 0.5743,
+      "defaulter_median": 0.4383
+    },
+    "EXT_SOURCE_3": {
+      "overall_median": 0.5371,
+      "non_defaulter_median": 0.5478,
+      "defaulter_median": 0.3825
+    },
+    "EXT_MEAN": {
+      "overall_median": 0.5295,
+      "non_defaulter_median": 0.5388,
+      "defaulter_median": 0.4043
+    },
+    "ANNUITY_INCOME_RATIO": {
+      "overall_median": 0.163,
+      "non_defaulter_median": 0.1625,
+      "defaulter_median": 0.1685
+    },
+    "CREDIT_TERM": {
+      "overall_median": 20.0,
+      "non_defaulter_median": 20.0,
+      "defaulter_median": 20.0
+    },
+    "AGE_YEARS": {
+      "overall_median": 43.1978,
+      "non_defaulter_median": 43.5346,
+      "defaulter_median": 39.1075
+    },
+    "EMPLOYED_YEARS": {
+      "overall_median": 4.5175,
+      "non_defaulter_median": 4.6324,
+      "defaulter_median": 3.3785
+    }
+  },
+  "presets": {
+    "sample_1": {
+      "SK_ID_CURR": 171202,
+      "NAME_CONTRACT_TYPE": "Cash loans",
+      "CODE_GENDER": "F",
+      "CNT_CHILDREN": 1,
+      "AMT_INCOME_TOTAL": 144000.0,
+      "AMT_CREDIT": 961146.0,
+      "AMT_ANNUITY": 28233.0,
+      "AMT_GOODS_PRICE": 688500.0,
+      "NAME_INCOME_TYPE": "Working",
+      "NAME_EDUCATION_TYPE": "Higher education",
+      "NAME_FAMILY_STATUS": "Married",
+      "NAME_HOUSING_TYPE": "House / apartment",
+      "REGION_POPULATION_RELATIVE": 0.025164,
+      "DAYS_BIRTH": -12108,
+      "DAYS_EMPLOYED": -2372,
+      "DAYS_REGISTRATION": -2446.0,
+      "DAYS_ID_PUBLISH": -3022,
+      "OWN_CAR_AGE": null,
+      "FLAG_MOBIL": 1,
+      "FLAG_EMP_PHONE": 1,
+      "FLAG_WORK_PHONE": 0,
+      "OCCUPATION_TYPE": "Medicine staff",
+      "CNT_FAM_MEMBERS": 3.0,
+      "REGION_RATING_CLIENT": 2,
+      "ORGANIZATION_TYPE": "Kindergarten",
+      "EXT_SOURCE_1": null,
+      "EXT_SOURCE_2": 0.7204155832419394,
+      "EXT_SOURCE_3": null,
+      "DAYS_LAST_PHONE_CHANGE": -1.0,
+      "AMT_REQ_CREDIT_BUREAU_HOUR": null,
+      "AMT_REQ_CREDIT_BUREAU_MON": null,
+      "AMT_REQ_CREDIT_BUREAU_QRT": null,
+      "AMT_REQ_CREDIT_BUREAU_YEAR": null
+    },
+    "sample_2": {
+      "SK_ID_CURR": 171203,
+      "NAME_CONTRACT_TYPE": "Cash loans",
+      "CODE_GENDER": "F",
+      "CNT_CHILDREN": 0,
+      "AMT_INCOME_TOTAL": 103500.0,
+      "AMT_CREDIT": 296280.0,
+      "AMT_ANNUITY": 16069.5,
+      "AMT_GOODS_PRICE": 225000.0,
+      "NAME_INCOME_TYPE": "Working",
+      "NAME_EDUCATION_TYPE": "Secondary / secondary special",
+      "NAME_FAMILY_STATUS": "Married",
+      "NAME_HOUSING_TYPE": "House / apartment",
+      "REGION_POPULATION_RELATIVE": 0.00702,
+      "DAYS_BIRTH": -17907,
+      "DAYS_EMPLOYED": -1712,
+      "DAYS_REGISTRATION": -10450.0,
+      "DAYS_ID_PUBLISH": -253,
+      "OWN_CAR_AGE": null,
+      "FLAG_MOBIL": 1,
+      "FLAG_EMP_PHONE": 1,
+      "FLAG_WORK_PHONE": 1,
+      "OCCUPATION_TYPE": "Cleaning staff",
+      "CNT_FAM_MEMBERS": 2.0,
+      "REGION_RATING_CLIENT": 2,
+      "ORGANIZATION_TYPE": "School",
+      "EXT_SOURCE_1": null,
+      "EXT_SOURCE_2": 0.2873062585469742,
+      "EXT_SOURCE_3": null,
+      "DAYS_LAST_PHONE_CHANGE": -212.0,
+      "AMT_REQ_CREDIT_BUREAU_HOUR": null,
+      "AMT_REQ_CREDIT_BUREAU_MON": null,
+      "AMT_REQ_CREDIT_BUREAU_QRT": null,
+      "AMT_REQ_CREDIT_BUREAU_YEAR": null
+    },
+    "sample_3": {
+      "SK_ID_CURR": 171204,
+      "NAME_CONTRACT_TYPE": "Cash loans",
+      "CODE_GENDER": "F",
+      "CNT_CHILDREN": 1,
+      "AMT_INCOME_TOTAL": 180000.0,
+      "AMT_CREDIT": 183694.5,
+      "AMT_ANNUITY": 11236.5,
+      "AMT_GOODS_PRICE": 139500.0,
+      "NAME_INCOME_TYPE": "Commercial associate",
+      "NAME_EDUCATION_TYPE": "Secondary / secondary special",
+      "NAME_FAMILY_STATUS": "Single / not married",
+      "NAME_HOUSING_TYPE": "House / apartment",
+      "REGION_POPULATION_RELATIVE": 0.006852,
+      "DAYS_BIRTH": -15221,
+      "DAYS_EMPLOYED": -553,
+      "DAYS_REGISTRATION": -1056.0,
+      "DAYS_ID_PUBLISH": -4495,
+      "OWN_CAR_AGE": null,
+      "FLAG_MOBIL": 1,
+      "FLAG_EMP_PHONE": 1,
+      "FLAG_WORK_PHONE": 0,
+      "OCCUPATION_TYPE": "Other",
+      "CNT_FAM_MEMBERS": 2.0,
+      "REGION_RATING_CLIENT": 3,
+      "ORGANIZATION_TYPE": "Trade: type 7",
+      "EXT_SOURCE_1": null,
+      "EXT_SOURCE_2": 0.3524559579915555,
+      "EXT_SOURCE_3": 0.3893387918468769,
+      "DAYS_LAST_PHONE_CHANGE": -428.0,
+      "AMT_REQ_CREDIT_BUREAU_HOUR": 0.0,
+      "AMT_REQ_CREDIT_BUREAU_MON": 1.0,
+      "AMT_REQ_CREDIT_BUREAU_QRT": 1.0,
+      "AMT_REQ_CREDIT_BUREAU_YEAR": 1.0
+    }
+  },
+  "benchmarks": [
+    {
+      "model": "Logistic Regression (Baseline)",
+      "val_auc": 0.6214,
+      "notes": "Simple linear baseline with StandardScaler"
+    },
+    {
+      "model": "Random Forest (max_depth=10)",
+      "val_auc": 0.7108,
+      "notes": "Tree ensemble baseline from tutorial"
+    },
+    {
+      "model": "AdaBoost Classifier",
+      "val_auc": 0.7325,
+      "notes": "Boosting with imputed numericals"
+    },
+    {
+      "model": "XGBoost Classifier",
+      "val_auc": 0.7482,
+      "notes": "Gradient boosted trees with native NaN handling"
+    },
+    {
+      "model": "LightGBM Classifier (Current App Model)",
+      "val_auc": 0.75545,
+      "notes": "Fast, high-accuracy GBDT with engineered ratios"
+    },
+    {
+      "model": "CatBoost (Optuna-Tuned)",
+      "val_auc": 0.753,
+      "notes": "Bayesian hyperparameter optimization (15 trials)"
+    },
+    {
+      "model": "Blended Weighted Ensemble (Final Submission)",
+      "val_auc": 0.7562,
+      "notes": "Ensemble weights: 0.60 XGB + 0.30 CatBoost + 0.10 LightGBM"
+    }
+  ]
+}
