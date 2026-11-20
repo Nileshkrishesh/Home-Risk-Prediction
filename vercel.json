@@ -4,7 +4,7 @@
   "rewrites": [
     {
       "source": "/api/:match*",
-      "destination": "https://home-risk-prediction.onrender.com/api/:match*"
+      "destination": "https://home-risk-prediction-3.onrender.com/api/:match*"
     },
     {
       "source": "/predict",

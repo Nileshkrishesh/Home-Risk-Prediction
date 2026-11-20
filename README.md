@@ -6,14 +6,14 @@
 **GCI Global 2025 Machine Learning Competition** &bull; **Kaggle Home Credit Risk Challenge**
 
 [![Live Demo](https://img.shields.io/badge/Demo-Vercel_Live-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://home-risk-prediction.vercel.app/)
-[![Backend](https://img.shields.io/badge/API-Render_Hosted-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://home-risk-prediction.onrender.com/api/health)
+[![Backend](https://img.shields.io/badge/API-Render_Hosted-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://home-risk-prediction-3.onrender.com/api/health)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Model](https://img.shields.io/badge/LightGBM-ROC--AUC_0.7554-blue?style=for-the-badge)](https://lightgbm.readthedocs.io/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 <br/>
 
-**[Explore Live Web App](https://home-risk-prediction.vercel.app/)** &bull; **[API Health](https://home-risk-prediction.onrender.com/api/health)** &bull; **[Model Notebooks](advanced_techniques/)**
+**[Explore Live Web App](https://home-risk-prediction.vercel.app/)** &bull; **[API Health](https://home-risk-prediction-3.onrender.com/api/health)** &bull; **[Model Notebooks](advanced_techniques/)**
 
 </div>
 
