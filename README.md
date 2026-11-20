@@ -129,9 +129,6 @@ Key domain features engineered from raw credit application attributes:
 │   ├── predictor.py                # Feature engineering & LightGBM inference
 │   ├── data_service.py             # Test data queries & submission parsers
 │   └── train_model.py              # Model training & serialization script
-├── frontend/                       # Source UI assets
-│   ├── templates/index.html        # Clean HTML5 dashboard
-│   └── static/                     # CSS styles & client JS
 ├── models/                         # Serialized models & metadata
 │   ├── lgbm_default_risk.joblib    # Trained production LightGBM model
 │   ├── model_metadata.json         # Feature names & categorical encodings
@@ -144,8 +141,10 @@ Key domain features engineered from raw credit application attributes:
 │   ├── submissionFinal.csv         # Final submission file
 │   ├── submission.csv              # Tutorial submission
 │   └── Submission(1).csv           # Iteration submission
-├── index.html                      # Root entrypoint for Vercel deployment
-├── static/                         # Root static files for Vercel
+├── static/                         # Web assets (CSS stylesheets & client JS)
+│   ├── css/style.css               # Clean Tailwind & UI typography styling
+│   └── js/app.js                   # Application logic & interactive charts
+├── index.html                      # Root web dashboard entrypoint (Vercel & Flask)
 ├── wsgi.py                         # Production WSGI entrypoint for Gunicorn
 ├── Procfile                        # Render / PaaS deployment directive
 ├── render.yaml                     # Render Blueprint specification

@@ -19,8 +19,8 @@ from backend.data_service import data_service
 
 app = Flask(
     __name__,
-    template_folder=os.path.join(BASE_DIR, "frontend", "templates"),
-    static_folder=os.path.join(BASE_DIR, "frontend", "static")
+    template_folder=BASE_DIR,
+    static_folder=os.path.join(BASE_DIR, "static")
 )
 CORS(app)
 
