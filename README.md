@@ -144,7 +144,8 @@ Key domain features engineered from raw credit application attributes:
 ├── static/                         # Web assets (CSS stylesheets & client JS)
 │   ├── css/style.css               # Clean Tailwind & UI typography styling
 │   └── js/app.js                   # Application logic & interactive charts
-├── index.html                      # Root web dashboard entrypoint (Vercel & Flask)
+├── index.html                      # Competition Hub & Overview page
+├── predict.html                    # Dedicated Risk Prediction & Underwriting Studio page
 ├── wsgi.py                         # Production WSGI entrypoint for Gunicorn
 ├── Procfile                        # Render / PaaS deployment directive
 ├── render.yaml                     # Render Blueprint specification

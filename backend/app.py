@@ -28,6 +28,11 @@ CORS(app)
 def index():
     return render_template("index.html")
 
+@app.route("/predict")
+@app.route("/predict.html")
+def predict_page():
+    return render_template("predict.html")
+
 @app.route("/api/health", methods=["GET"])
 def health():
     return jsonify({

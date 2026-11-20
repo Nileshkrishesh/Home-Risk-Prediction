@@ -1,9 +1,14 @@
 {
   "version": 2,
+  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/api/:match*",
       "destination": "https://home-risk-prediction.onrender.com/api/:match*"
+    },
+    {
+      "source": "/predict",
+      "destination": "/predict.html"
     }
   ]
 }

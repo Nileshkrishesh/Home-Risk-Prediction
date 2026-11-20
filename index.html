@@ -3,288 +3,223 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Credit Default Risk - GCI Global 2025</title>
+  <title>Home Credit Default Risk - GCI Global 2025 Competition Hub</title>
   
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Custom CSS -->
+  <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
 
-  <!-- Top Navbar -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-base shadow-sm shadow-indigo-200">
-          HC
+  <!-- Top Glassmorphism Navigation -->
+  <header class="navbar-glass sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      
+      <!-- Brand & Competition Identifier -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white font-extrabold text-base shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+          GCI
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <h1 class="text-sm font-bold text-slate-900 tracking-tight">Home Credit Default Risk</h1>
-            <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+            <span class="text-sm font-bold text-slate-900 tracking-tight">Home Credit Default Risk</span>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
               GCI Global 2025
             </span>
           </div>
-          <p class="text-xs text-slate-500">In-class Machine Learning Competition &bull; Model Evaluation</p>
+          <p class="text-xs text-slate-500">In-Class Machine Learning Competition Hub</p>
         </div>
-      </div>
+      </a>
 
-      <!-- Right Header Badges -->
-      <div class="flex items-center gap-2 text-xs">
-        <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 border border-slate-200 font-mono text-[11px]">
-          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-          LightGBM Baseline &bull; ROC-AUC: 0.755
-        </span>
+      <!-- Navigation & Action Links -->
+      <div class="flex items-center gap-3">
+        <nav class="hidden md:flex items-center gap-1 text-xs font-semibold text-slate-600 mr-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg bg-slate-100 text-indigo-700 font-bold">Overview</a>
+          <a href="#submissions" class="px-3 py-1.5 rounded-lg hover:text-slate-900 hover:bg-slate-100/60 transition-colors">Submissions</a>
+          <a href="#benchmarks" class="px-3 py-1.5 rounded-lg hover:text-slate-900 hover:bg-slate-100/60 transition-colors">Benchmarks</a>
+        </nav>
+
+        <!-- Backend Health Badge -->
+        <div id="backend-status-badge" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-100 text-slate-600 border border-slate-200">
+          <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Checking API...
+        </div>
+
+        <!-- Prominent Prediction Page CTA -->
+        <a href="predict.html" class="btn-primary-gradient text-xs py-2 px-3.5 shadow-sm">
+          <span>Prediction Studio</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
       </div>
     </div>
   </header>
 
   <!-- Main Content Container -->
-  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full space-y-6">
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full space-y-10">
 
-    <!-- Hero / Test Applicant Search Strip -->
-    <div class="card-panel p-4 flex flex-wrap items-center justify-between gap-4 border-l-4 border-l-indigo-600">
-      <div class="flex flex-wrap items-center gap-3 flex-1 min-w-[280px]">
-        <div class="flex items-center gap-1.5 text-xs font-semibold text-slate-700">
-          <i data-lucide="search" class="w-4 h-4 text-indigo-600"></i>
-          <span>Lookup Test Applicant:</span>
-        </div>
-        <div class="relative flex items-center">
-          <input type="number" id="input-applicant-id" placeholder="SK_ID_CURR (e.g. 171202)" class="field-input font-mono text-xs py-1.5 pl-3 pr-2 w-48">
-        </div>
-        <button id="btn-search-id" class="btn-dark py-1.5 px-3.5 text-xs">
-          Lookup & Score
-        </button>
-      </div>
+    <!-- Hero Section -->
+    <section class="card-panel p-6 sm:p-10 bg-gradient-to-br from-white via-indigo-50/20 to-slate-50 border-slate-200 glow-card relative overflow-hidden">
+      <!-- Decorative background blur circle -->
+      <div class="absolute -right-16 -top-16 w-72 h-72 bg-indigo-400/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-16 -bottom-16 w-72 h-72 bg-violet-400/10 rounded-full blur-3xl pointer-events-none"></div>
 
-      <!-- Sample Applicant Chips -->
-      <div class="flex items-center gap-1.5 text-xs">
-        <span class="text-slate-400 font-medium">Test Samples:</span>
-        <button data-sample-id="171202" class="btn-light py-1 px-2 font-mono text-xs">#171202</button>
-        <button data-sample-id="171203" class="btn-light py-1 px-2 font-mono text-xs">#171203</button>
-        <button data-sample-id="171204" class="btn-light py-1 px-2 font-mono text-xs">#171204</button>
-      </div>
-    </div>
-
-    <!-- Cross-Model Submission Comparison Banner (Revealed when an ID is looked up) -->
-    <div id="comparison-box" class="hidden card-panel p-3.5 bg-indigo-50/40 border-indigo-200">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-xs font-semibold text-indigo-900 flex items-center gap-1.5">
-          <i data-lucide="layers" class="w-3.5 h-3.5 text-indigo-600"></i>
-          Predictions Across Competition Submissions:
-        </span>
-        <span class="text-[11px] text-slate-500 font-medium">GCI Global Leaderboard Models</span>
-      </div>
-      <div id="comparison-items" class="flex flex-wrap items-center gap-2">
-        <!-- Dynamically populated -->
-      </div>
-    </div>
-
-    <!-- Quick Scenario Presets -->
-    <div class="flex flex-wrap items-center justify-between text-xs text-slate-500 px-1">
-      <div class="flex items-center gap-1">
-        <i data-lucide="sliders" class="w-3.5 h-3.5 text-slate-400"></i>
-        <span>Borrower Profiles:</span>
-      </div>
-      <div class="flex items-center gap-1.5">
-        <button data-preset="prime" class="btn-light py-1 px-2.5 text-xs text-emerald-700 bg-emerald-50/60 border-emerald-200 hover:bg-emerald-100/60">
-          Prime Applicant (Low Risk)
-        </button>
-        <button data-preset="average" class="btn-light py-1 px-2.5 text-xs text-amber-700 bg-amber-50/60 border-amber-200 hover:bg-amber-100/60">
-          Average Applicant (Moderate Risk)
-        </button>
-        <button data-preset="high_risk" class="btn-light py-1 px-2.5 text-xs text-rose-700 bg-rose-50/60 border-rose-200 hover:bg-rose-100/60">
-          Subprime Applicant (High Risk)
-        </button>
-      </div>
-    </div>
-
-    <!-- Main 2-Column Dashboard Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-
-      <!-- Left Column: Applicant Input Form (7 cols) -->
-      <div class="md:col-span-7 space-y-4">
-        
-        <div class="card-panel p-5 space-y-4">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-            <span class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
-              <i data-lucide="user-check" class="w-4 h-4 text-indigo-600"></i> Loan & Borrower Details
-            </span>
-            <span class="text-[11px] text-slate-400">Auto-calculated</span>
-          </div>
-
-          <!-- Financial Inputs Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-            <div>
-              <label class="field-label">Annual Total Income ($)</label>
-              <input type="number" id="AMT_INCOME_TOTAL" class="field-input watch-input mono-num" value="180000" step="5000">
-            </div>
-            <div>
-              <label class="field-label">Credit Amount ($)</label>
-              <input type="number" id="AMT_CREDIT" class="field-input watch-input mono-num" value="500000" step="10000">
-            </div>
-            <div>
-              <label class="field-label">Annual Annuity ($)</label>
-              <input type="number" id="AMT_ANNUITY" class="field-input watch-input mono-num" value="25000" step="1000">
-            </div>
-            <div>
-              <label class="field-label">Contract Type</label>
-              <select id="NAME_CONTRACT_TYPE" class="field-input watch-input">
-                <option value="Cash loans">Cash loans</option>
-                <option value="Revolving loans">Revolving loans</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Demographics Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-1">
-            <div>
-              <label class="field-label">Age (Years)</label>
-              <input type="number" id="calc_age_years" class="field-input watch-input mono-num" value="45" min="18" max="75">
-            </div>
-            <div>
-              <label class="field-label">Employment (Years)</label>
-              <input type="number" id="calc_employed_years" class="field-input watch-input mono-num" value="8" min="0" max="50" step="0.5">
-            </div>
-            <div>
-              <label class="field-label">Education Level</label>
-              <select id="NAME_EDUCATION_TYPE" class="field-input watch-input text-xs">
-                <option value="Higher education">Higher education</option>
-                <option value="Secondary / secondary special">Secondary / special</option>
-                <option value="Incomplete higher">Incomplete higher</option>
-                <option value="Lower secondary">Lower secondary</option>
-                <option value="Academic degree">Academic degree</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- External Bureau Score (Top Predictor) -->
-          <div class="pt-2 pb-1">
-            <div class="flex justify-between items-center text-xs mb-1.5">
-              <span class="font-medium text-slate-700 flex items-center gap-1">
-                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-indigo-600"></i> External Bureau Score (EXT_SOURCE_2)
-              </span>
-              <input type="number" id="EXT_SOURCE_2" class="watch-input w-20 border border-slate-300 rounded px-2 py-0.5 text-xs text-right mono-num font-semibold text-indigo-700" value="0.65" step="0.01" min="0" max="1">
-            </div>
-            <input type="range" id="EXT_SOURCE_2_range" class="watch-range w-full" min="0" max="1" step="0.01" value="0.65">
-            <div class="flex justify-between text-[10px] text-slate-400 mt-0.5">
-              <span>0.00 (Poor)</span>
-              <span>0.50 (Median)</span>
-              <span>1.00 (Prime)</span>
-            </div>
-          </div>
-
-          <!-- Collapsible Advanced Options -->
-          <div class="pt-2 border-t border-slate-100">
-            <a href="#" id="toggle-more-options" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium inline-flex items-center gap-1">
-              + Advanced attributes (Car age, Children, Inquiries)
-            </a>
-
-            <div id="more-options-container" class="hidden grid grid-cols-3 gap-3 pt-3 mt-2 border-t border-slate-100">
-              <div>
-                <label class="field-label">Car Age (0 if none)</label>
-                <input type="number" id="OWN_CAR_AGE" class="field-input watch-input mono-num" value="4" min="0">
-              </div>
-              <div>
-                <label class="field-label">Children Count</label>
-                <input type="number" id="CNT_CHILDREN" class="field-input watch-input mono-num" value="0" min="0">
-              </div>
-              <div>
-                <label class="field-label">Inquiries (Past Year)</label>
-                <input type="number" id="AMT_REQ_CREDIT_BUREAU_YEAR" class="field-input watch-input mono-num" value="1" min="0">
-              </div>
-            </div>
-          </div>
-
-          <!-- Action Button -->
-          <div class="pt-2">
-            <button id="btn-calculate" class="btn-dark w-full py-2.5 shadow-sm text-sm font-semibold">
-              <i data-lucide="play" class="w-4 h-4"></i> Run Risk Prediction
-            </button>
-          </div>
+      <div class="max-w-3xl space-y-4 relative z-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>LightGBM Baseline &bull; Validation ROC-AUC: 0.7554</span>
         </div>
 
-      </div>
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          Intelligent Credit Scoring & <br class="hidden sm:inline"/>
+          <span class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-violet-600 bg-clip-text text-transparent">Default Risk Underwriting</span>
+        </h1>
 
-      <!-- Right Column: Result Card (5 cols sticky) -->
-      <div class="md:col-span-5">
-        
-        <div class="card-panel p-6 space-y-4 sticky top-20 border-slate-300">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Underwriting Assessment</span>
-            <span id="res-badge" class="inline-block px-2.5 py-0.5 rounded text-xs font-semibold badge-status-low">
-              Low Risk
-            </span>
-          </div>
+        <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+          Developed for the <strong>GCI Global 2025</strong> in-class machine learning competition (Kaggle Home Credit Risk). Predict loan default probabilities, cross-evaluate leaderboard submission files, and test real-time underwriting simulations.
+        </p>
 
-          <!-- Main Probability Display -->
-          <div class="text-center py-2">
-            <div id="res-prob" class="text-4xl font-extrabold mono-num text-slate-900 tracking-tight">2.1%</div>
-            <div class="text-xs text-slate-500 font-medium mt-1">Default Risk Probability</div>
-          </div>
-
-          <!-- Spectrum Meter -->
-          <div>
-            <div class="meter-track">
-              <div id="res-meter-fill" class="meter-fill" style="width: 2.1%; background-color: #10b981;"></div>
-            </div>
-            <div class="flex justify-between text-[10px] text-slate-400 font-medium mt-1">
-              <span>0% Low Risk</span>
-              <span class="text-slate-600 font-semibold">8% Market Baseline</span>
-              <span>25%+ Declined</span>
-            </div>
-          </div>
-
-          <!-- Financial Ratio Cards -->
-          <div class="grid grid-cols-3 gap-2 text-center py-3 px-2 bg-slate-50 rounded-lg border border-slate-200">
-            <div>
-              <div class="text-[10px] text-slate-500 font-medium uppercase">DTI Ratio</div>
-              <div id="res-dti" class="text-xs mono-num font-bold text-slate-900 mt-0.5">13.9%</div>
-            </div>
-            <div>
-              <div class="text-[10px] text-slate-500 font-medium uppercase">Credit / Inc</div>
-              <div id="res-credit-income" class="text-xs mono-num font-bold text-slate-900 mt-0.5">2.8x</div>
-            </div>
-            <div>
-              <div class="text-[10px] text-slate-500 font-medium uppercase">Loan Term</div>
-              <div id="res-term" class="text-xs mono-num font-bold text-slate-900 mt-0.5">20.0 mos</div>
-            </div>
-          </div>
-
-          <!-- Key Predictive Drivers -->
-          <div>
-            <div class="text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-2 flex items-center gap-1">
-              <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-indigo-600"></i> Key Decision Drivers
-            </div>
-            <ul id="res-factors" class="space-y-1.5">
-              <!-- Dynamically populated -->
-            </ul>
-          </div>
-
+        <!-- CTA Buttons -->
+        <div class="pt-2 flex flex-wrap items-center gap-3">
+          <a href="predict.html" class="btn-primary-gradient py-3 px-6 text-sm font-semibold shadow-md">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <span>Launch Prediction Studio</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+          <a href="#submissions" class="btn-light py-2.5 px-4 text-xs font-medium">
+            <i data-lucide="table-2" class="w-4 h-4 text-slate-500"></i>
+            <span>View Submissions (output/)</span>
+          </a>
         </div>
+      </div>
+    </section>
 
+    <!-- Key Performance Metrics Grid -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="card-panel p-5 card-panel-hover border-l-4 border-l-indigo-600">
+        <div class="flex items-center justify-between text-slate-500 text-xs font-semibold mb-2">
+          <span>VALIDATION ROC-AUC</span>
+          <i data-lucide="award" class="w-4 h-4 text-indigo-600"></i>
+        </div>
+        <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mono-num">0.7554</div>
+        <div class="text-[11px] text-emerald-600 font-medium mt-1 flex items-center gap-1">
+          <i data-lucide="trending-up" class="w-3 h-3"></i> Top-tier gradient boost
+        </div>
       </div>
 
-    </div>
+      <div class="card-panel p-5 card-panel-hover border-l-4 border-l-blue-600">
+        <div class="flex items-center justify-between text-slate-500 text-xs font-semibold mb-2">
+          <span>TRAINING APPLICATIONS</span>
+          <i data-lucide="database" class="w-4 h-4 text-blue-600"></i>
+        </div>
+        <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mono-num">171,202</div>
+        <div class="text-[11px] text-slate-500 font-medium mt-1">34 Engineered features</div>
+      </div>
 
-    <!-- Competition Submissions Summary Table -->
-    <div class="card-panel p-5 space-y-3">
-      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+      <div class="card-panel p-5 card-panel-hover border-l-4 border-l-violet-600">
+        <div class="flex items-center justify-between text-slate-500 text-xs font-semibold mb-2">
+          <span>TEST APPLICANTS</span>
+          <i data-lucide="users" class="w-4 h-4 text-violet-600"></i>
+        </div>
+        <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mono-num">61,500</div>
+        <div class="text-[11px] text-slate-500 font-medium mt-1">Omnicampus test set</div>
+      </div>
+
+      <div class="card-panel p-5 card-panel-hover border-l-4 border-l-emerald-600">
+        <div class="flex items-center justify-between text-slate-500 text-xs font-semibold mb-2">
+          <span>INFERENCE SPEED</span>
+          <i data-lucide="zap" class="w-4 h-4 text-emerald-600"></i>
+        </div>
+        <div class="text-2xl sm:text-3xl font-extrabold text-slate-900 mono-num">&lt; 25ms</div>
+        <div class="text-[11px] text-emerald-600 font-medium mt-1">LightGBM C-core engine</div>
+      </div>
+    </section>
+
+    <!-- Quick Applicant Dossier Lookup Strip -->
+    <section class="card-panel p-6 space-y-4 border-slate-200">
+      <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
         <div>
-          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-800">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
+            <i data-lucide="search" class="w-4 h-4 text-indigo-600"></i>
+            Quick Applicant Dossier Search
+          </h2>
+          <p class="text-xs text-slate-500">Lookup any unseen test applicant by SK_ID_CURR to inspect profile and launch into Prediction Studio</p>
+        </div>
+        <div class="flex items-center gap-1.5 text-xs">
+          <span class="text-slate-400 font-medium">Quick Samples:</span>
+          <button data-hub-sample="171202" class="btn-light py-1 px-2.5 font-mono text-xs">#171202</button>
+          <button data-hub-sample="171203" class="btn-light py-1 px-2.5 font-mono text-xs">#171203</button>
+          <button data-hub-sample="171204" class="btn-light py-1 px-2.5 font-mono text-xs">#171204</button>
+        </div>
+      </div>
+
+      <!-- Search Input Bar -->
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="relative flex-1 min-w-[240px]">
+          <i data-lucide="hash" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
+          <input type="number" id="hub-applicant-input" placeholder="Enter SK_ID_CURR (e.g. 171202)" class="field-input pl-9 font-mono text-sm">
+        </div>
+        <button id="hub-applicant-btn" class="btn-dark py-2.5 px-4 text-xs font-semibold">
+          <i data-lucide="search" class="w-3.5 h-3.5"></i>
+          <span>Lookup Applicant</span>
+        </button>
+      </div>
+
+      <!-- Applicant Preview Card (Populated dynamically) -->
+      <div id="hub-preview-card" class="hidden p-4 rounded-xl bg-indigo-50/50 border border-indigo-100 space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-indigo-900 mono-num" id="hub-preview-id">Applicant #171202</span>
+            <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-white text-indigo-700 border border-indigo-200" id="hub-preview-risk">
+              Assessing...
+            </span>
+          </div>
+          <a id="hub-preview-link" href="predict.html?id=171202" class="btn-primary-gradient text-xs py-1.5 px-3">
+            <span>Open in Prediction Studio</span>
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs bg-white p-3 rounded-lg border border-indigo-100">
+          <div>
+            <span class="text-slate-400 block text-[10px] uppercase font-semibold">Total Income</span>
+            <span class="font-bold text-slate-900 mono-num" id="hub-preview-income">—</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[10px] uppercase font-semibold">Credit Amount</span>
+            <span class="font-bold text-slate-900 mono-num" id="hub-preview-credit">—</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[10px] uppercase font-semibold">Annual Annuity</span>
+            <span class="font-bold text-slate-900 mono-num" id="hub-preview-annuity">—</span>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[10px] uppercase font-semibold">Bureau Rating</span>
+            <span class="font-bold text-indigo-600 mono-num" id="hub-preview-ext">—</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Competition Submissions Section -->
+    <section id="submissions" class="card-panel p-6 space-y-4 border-slate-200">
+      <div class="flex flex-wrap items-center justify-between pb-3 border-b border-slate-100 gap-2">
+        <div>
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
+            <i data-lucide="files" class="w-4 h-4 text-indigo-600"></i>
             GCI Global Competition Submissions (output/)
           </h2>
-          <p class="text-[11px] text-slate-500">Models and submission outputs evaluated on Omnicampus leaderboard</p>
+          <p class="text-xs text-slate-500">Output files generated for the Omnicampus competition leaderboard</p>
         </div>
-        <span class="text-xs text-indigo-700 font-medium font-mono">61,500 Test Rows</span>
+        <span class="text-xs text-indigo-700 font-semibold font-mono bg-indigo-50 border border-indigo-200 px-2.5 py-1 rounded-md">
+          61,500 Test Applicants
+        </span>
       </div>
 
       <div class="overflow-x-auto">
@@ -295,30 +230,130 @@
               <th>Applicants</th>
               <th>Mean Default Risk</th>
               <th>Median Risk</th>
+              <th>Distribution</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody id="submissions-tbody">
-            <!-- Dynamically populated -->
+            <!-- Dynamically populated by app.js -->
+            <tr>
+              <td colspan="6" class="text-center py-6 text-slate-400 text-xs">
+                <i data-lucide="loader-2" class="w-4 h-4 animate-spin inline-block mr-1"></i> Loading submission files...
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
-    </div>
+    </section>
+
+    <!-- Model Progression & Benchmark Table -->
+    <section id="benchmarks" class="card-panel p-6 space-y-4 border-slate-200">
+      <div class="pb-3 border-b border-slate-100">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-900 flex items-center gap-2">
+          <i data-lucide="bar-chart-3" class="w-4 h-4 text-indigo-600"></i>
+          Model Progression & Validation Benchmarks
+        </h2>
+        <p class="text-xs text-slate-500">ROC-AUC performance across models evaluated throughout competition development</p>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="table-custom">
+          <thead>
+            <tr>
+              <th>Model Architecture</th>
+              <th>Validation ROC-AUC</th>
+              <th>Type / Tuning</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-medium text-slate-900">Logistic Regression</td>
+              <td class="mono-num text-slate-600">0.6214</td>
+              <td class="text-xs text-slate-500">Baseline with StandardScaler</td>
+              <td><span class="text-[10px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">Baseline</span></td>
+            </tr>
+            <tr>
+              <td class="font-medium text-slate-900">Random Forest (depth=10)</td>
+              <td class="mono-num text-slate-600">0.7108</td>
+              <td class="text-xs text-slate-500">Tree ensemble baseline from tutorial</td>
+              <td><span class="text-[10px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">Iteration</span></td>
+            </tr>
+            <tr>
+              <td class="font-medium text-slate-900">AdaBoost Classifier</td>
+              <td class="mono-num text-slate-600">0.7325</td>
+              <td class="text-xs text-slate-500">Boosting pipeline with median imputation</td>
+              <td><span class="text-[10px] font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">Iteration</span></td>
+            </tr>
+            <tr>
+              <td class="font-medium text-slate-900">XGBoost Classifier</td>
+              <td class="mono-num text-slate-600">0.7482</td>
+              <td class="text-xs text-slate-500">Gradient boosted trees with native sparsity</td>
+              <td><span class="text-[10px] font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded">Strong</span></td>
+            </tr>
+            <tr class="bg-indigo-50/40">
+              <td class="font-bold text-indigo-900 flex items-center gap-2">
+                <span>LightGBM Classifier</span>
+                <span class="text-[10px] font-bold text-white bg-indigo-600 px-1.5 py-0.5 rounded">Production</span>
+              </td>
+              <td class="mono-num font-bold text-indigo-700 text-sm">0.7554</td>
+              <td class="text-xs text-indigo-800 font-medium">Tuned LightGBM with engineered financial ratios</td>
+              <td><span class="text-[10px] font-bold text-indigo-700 bg-indigo-100 border border-indigo-200 px-2 py-0.5 rounded">Active App Model</span></td>
+            </tr>
+            <tr>
+              <td class="font-medium text-slate-900">CatBoost (Optuna-Tuned)</td>
+              <td class="mono-num text-slate-600">0.7530</td>
+              <td class="text-xs text-slate-500">15-trial Bayesian hyperparameter search</td>
+              <td><span class="text-[10px] font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded">Strong</span></td>
+            </tr>
+            <tr>
+              <td class="font-medium text-slate-900">Blended Weighted Ensemble</td>
+              <td class="mono-num font-bold text-emerald-700">0.7562</td>
+              <td class="text-xs text-slate-500">Blend: 0.60 XGB + 0.30 CatBoost + 0.10 LGBM</td>
+              <td><span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">Top Ensemble</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Bottom Prediction Studio Invitation Banner -->
+    <section class="card-panel p-8 bg-gradient-to-r from-slate-900 to-indigo-950 text-white flex flex-wrap items-center justify-between gap-6 shadow-xl">
+      <div class="space-y-1 max-w-xl">
+        <h3 class="text-lg sm:text-xl font-bold tracking-tight">Ready to Run Underwriting Simulations?</h3>
+        <p class="text-xs sm:text-sm text-slate-300">
+          Open the dedicated Prediction Studio to adjust borrower financials, test credit scenarios, and receive instant risk assessments with decision driver factor analysis.
+        </p>
+      </div>
+      <a href="predict.html" class="btn-primary-gradient py-3 px-6 text-sm font-bold shadow-lg hover:scale-105 transition-transform">
+        <span>Launch Prediction Studio</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </section>
 
   </main>
 
   <!-- Clean Footer -->
-  <footer class="border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-500">
-    <div class="max-w-5xl mx-auto px-4 flex flex-wrap items-center justify-between gap-2">
-      <span><strong>GCI Global 2025</strong> In-Class Machine Learning Competition</span>
-      <span class="text-slate-400">Home Credit Default Risk &bull; LightGBM Model</span>
+  <footer class="border-t border-slate-200 bg-white py-6 text-xs text-slate-500 mt-12">
+    <div class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-700">GCI Global 2025</span>
+        <span>&bull; In-Class Machine Learning Competition</span>
+      </div>
+      <div class="flex items-center gap-4 text-slate-400">
+        <a href="predict.html" class="hover:text-indigo-600 font-medium">Prediction Studio</a>
+        <span>&bull;</span>
+        <a href="#submissions" class="hover:text-indigo-600 font-medium">Submissions</a>
+        <span>&bull;</span>
+        <a href="https://github.com/Nileshkrishesh/Home-Risk-Prediction" target="_blank" class="hover:text-indigo-600 font-medium">GitHub Repository</a>
+      </div>
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script src="/static/js/app.js"></script>
   <script>
-    // Initialize Lucide icons
-    lucide.createIcons();
+    if (window.lucide) lucide.createIcons();
   </script>
 </body>
 </html>
