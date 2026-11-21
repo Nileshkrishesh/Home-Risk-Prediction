@@ -2,372 +2,596 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Underwriting & Risk Prediction Studio - GCI Global 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Credit Risk AI — Production Underwriting Engine</title>
   
-  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <!-- Inter & JetBrains Mono Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Custom Dark Fintech Stylesheet -->
+  <!-- Clean Enterprise CSS -->
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body class="bg-ambient-mesh min-h-screen flex flex-col text-slate-100 antialiased">
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
 
-  <!-- Top Glassmorphism Navigation -->
-  <header class="navbar-glass sticky top-0 z-40 w-full">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+  <!-- Top Enterprise Navigation Bar -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
       
-      <!-- Back to Overview & Brand -->
+      <!-- Brand & Model Tagline -->
       <div class="flex items-center gap-3">
-        <a href="index.html" onclick="window.location.href='index.html'" class="btn-glass text-xs py-1.5 px-3">
-          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
-          <span>Hub Overview</span>
-        </a>
-
-        <div class="h-5 w-px bg-slate-800 hidden sm:block"></div>
-
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-500 via-indigo-600 to-violet-600 flex items-center justify-center text-white font-extrabold text-xs shadow-md shadow-indigo-500/30">
-            PS
+        <div class="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-xs">
+          HC
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-sm font-bold text-slate-900 tracking-tight">Home Credit Risk AI</h1>
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+              LightGBM v1.0
+            </span>
           </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="text-sm sm:text-base font-bold text-white tracking-tight">Prediction Studio</span>
-              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                GCI Global 2025
-              </span>
-            </div>
-            <p class="text-[11px] text-slate-400 hidden sm:block">Real-Time LightGBM Underwriting Engine</p>
-          </div>
+          <p class="text-xs text-slate-500 hidden sm:block">Automated Credit Underwriting & Default Risk Scoring</p>
         </div>
       </div>
 
-      <!-- Right Header Indicators -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-900/80 text-slate-300 border border-slate-700/50 font-mono text-[11px]">
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          ROC-AUC: 0.7554
-        </span>
+      <!-- Right Header Indicators & Model Benchmark -->
+      <div class="flex items-center gap-3">
+        <div class="hidden md:flex items-center gap-2 text-xs font-mono text-slate-600 bg-slate-100 px-3 py-1.5 rounded-md border border-slate-200">
+          <span class="text-slate-400">Model AUC:</span>
+          <span class="font-bold text-indigo-700">0.7554</span>
+          <span class="text-slate-300">|</span>
+          <span class="text-slate-400">Features:</span>
+          <span class="font-bold text-slate-800">44</span>
+        </div>
 
-        <div id="backend-status-badge" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-900/80 text-slate-400 border border-slate-700/50">
-          <span class="w-1.5 h-1.5 rounded-full bg-slate-500 animate-pulse"></span> Connecting...
+        <!-- Live Backend Status -->
+        <div id="backend-status-badge" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          <span>Engine Online</span>
         </div>
       </div>
+
     </div>
   </header>
 
-  <!-- Main Studio Workspace -->
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-1 w-full space-y-6">
-
-    <!-- Top Action Bar: Applicant Lookup & Presets -->
-    <section class="card-dark p-4 sm:p-5 border-l-4 border-l-indigo-500 space-y-3">
-      <div class="flex flex-wrap items-center justify-between gap-4">
-        
-        <!-- Applicant Search Input -->
-        <div class="flex flex-wrap items-center gap-2.5 flex-1 min-w-[280px]">
-          <div class="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
-            <i data-lucide="search" class="w-4 h-4 text-indigo-400"></i>
-            <span>Test Applicant:</span>
-          </div>
-          <div class="relative flex-1 sm:flex-initial">
-            <input type="number" id="input-applicant-id" placeholder="SK_ID_CURR (e.g. 171202)" class="dark-field-input font-mono text-xs py-1.5 pl-3 pr-2 w-full sm:w-48">
-          </div>
-          <button id="btn-search-id" class="btn-glow-primary py-1.5 px-4 text-xs font-bold">
-            <span>Lookup & Score</span>
+  <!-- Sub-Header: Presets & Real Test Applicant Search -->
+  <section class="bg-white border-b border-slate-200 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-wrap items-center justify-between gap-3 text-xs">
+      
+      <!-- Scenario Profile Presets -->
+      <div class="flex items-center gap-2">
+        <span class="text-slate-500 font-medium flex items-center gap-1">
+          <i data-lucide="sliders" class="w-3.5 h-3.5 text-slate-400"></i>
+          Scenario Presets:
+        </span>
+        <div class="flex items-center gap-1.5">
+          <button data-preset="prime" class="btn-chip" title="High income, established employment, strong credit score">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Prime Borrower
           </button>
-        </div>
-
-        <!-- Sample ID Chips -->
-        <div class="flex items-center gap-1.5 text-xs">
-          <span class="text-slate-400 text-[11px]">Samples:</span>
-          <button data-sample-id="171202" class="btn-pill-chip">#171202</button>
-          <button data-sample-id="171203" class="btn-pill-chip">#171203</button>
-          <button data-sample-id="171204" class="btn-pill-chip">#171204</button>
+          <button data-preset="average" class="btn-chip active" title="Median income, standard credit score">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Standard / Median
+          </button>
+          <button data-preset="high_risk" class="btn-chip" title="Low income, high inquiries, lower bureau rating">
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> Subprime / High-Risk
+          </button>
         </div>
       </div>
 
-      <!-- Quick Preset Profiles -->
-      <div class="flex flex-wrap items-center justify-between pt-2 border-t border-slate-800 gap-2 text-xs">
-        <span class="text-slate-400 font-medium flex items-center gap-1 text-[11px]">
-          <i data-lucide="sliders" class="w-3.5 h-3.5 text-slate-500"></i>
-          Borrower Scenario Presets:
+      <!-- Test Dataset Applicant Search -->
+      <div class="flex items-center gap-2">
+        <span class="text-slate-500 font-medium hidden sm:inline-flex items-center gap-1">
+          <i data-lucide="database" class="w-3.5 h-3.5 text-slate-400"></i>
+          Test Dataset Applicant:
         </span>
-        <div class="flex flex-wrap items-center gap-2">
-          <button data-preset="prime" class="btn-glass text-xs py-1 px-3 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/10">
-            &check; Prime (Low Risk)
-          </button>
-          <button data-preset="average" class="btn-glass text-xs py-1 px-3 text-amber-400 border-amber-500/30 hover:bg-amber-500/10">
-            &bull; Standard (Moderate Risk)
-          </button>
-          <button data-preset="high_risk" class="btn-glass text-xs py-1 px-3 text-rose-400 border-rose-500/30 hover:bg-rose-500/10">
-            &times; Subprime (High Risk)
+        <div class="flex items-center gap-1">
+          <input type="number" id="input-applicant-id" placeholder="SK_ID_CURR (e.g. 171202)" class="saas-input h-8 text-xs font-mono w-44 py-1 px-2.5">
+          <button id="btn-search-id" class="btn-secondary h-8 text-xs px-2.5 py-1">
+            Load & Score
           </button>
         </div>
+        <div class="hidden lg:flex items-center gap-1 text-[11px] text-slate-400 ml-1">
+          <span>Samples:</span>
+          <button data-sample-id="171202" class="text-indigo-600 hover:underline font-mono">#171202</button>
+          <button data-sample-id="171203" class="text-indigo-600 hover:underline font-mono">#171203</button>
+          <button data-sample-id="171204" class="text-indigo-600 hover:underline font-mono">#171204</button>
+        </div>
       </div>
-    </section>
 
-    <!-- Cross-Model Competition Comparison Strip (Revealed when an applicant is active) -->
-    <div id="comparison-box" class="hidden card-dark p-4 sm:p-5 bg-indigo-950/40 border border-indigo-500/30 space-y-2.5">
-      <div class="flex flex-wrap items-center justify-between gap-2">
-        <span class="text-xs font-bold text-white flex items-center gap-1.5">
-          <i data-lucide="layers" class="w-4 h-4 text-indigo-400"></i>
-          Cross-Model Prediction Matrix for Applicant:
-        </span>
-        <span class="text-[11px] text-indigo-300 font-medium font-mono">GCI Global Competition Submissions</span>
+    </div>
+  </section>
+
+  <!-- Main Split Studio Workspace -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex-1 w-full">
+    
+    <!-- Cross-Model Submission Comparison Banner (Appears when test applicant is loaded) -->
+    <div id="comparison-box" class="hidden mb-6 p-4 rounded-xl bg-indigo-50/70 border border-indigo-200 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <i data-lucide="layers" class="w-4 h-4 text-indigo-600"></i>
+        <span class="text-xs font-bold text-indigo-900">Cross-Model Predictions for Applicant:</span>
       </div>
       <div id="comparison-items" class="flex flex-wrap items-center gap-2">
         <!-- Dynamically populated -->
       </div>
     </div>
 
-    <!-- 2-Column Underwriting Studio Grid -->
+    <!-- 2-Column Responsive Workspace Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-      <!-- Left Column: Input Form Controls (7 cols) -->
-      <div class="lg:col-span-7 space-y-5">
+      <!-- LEFT COLUMN: Input Feature Workspace (7 cols) -->
+      <section class="lg:col-span-7 space-y-5">
         
-        <div class="card-dark p-5 sm:p-7 space-y-5">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
-              <i data-lucide="wallet" class="w-4 h-4 text-indigo-400"></i>
-              Financial & Loan Parameters
-            </h2>
-            <span class="text-[11px] text-indigo-400 font-mono">Live Real-Time Scoring</span>
-          </div>
-
-          <!-- Financial Inputs Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="dark-field-label" for="AMT_INCOME_TOTAL">Annual Total Income ($)</label>
-              <input type="number" id="AMT_INCOME_TOTAL" class="dark-field-input watch-input mono-num" value="180000" step="5000">
-            </div>
-            <div>
-              <label class="dark-field-label" for="AMT_CREDIT">Credit / Loan Amount ($)</label>
-              <input type="number" id="AMT_CREDIT" class="dark-field-input watch-input mono-num" value="500000" step="10000">
-            </div>
-            <div>
-              <label class="dark-field-label" for="AMT_ANNUITY">Annual Annuity Payment ($)</label>
-              <input type="number" id="AMT_ANNUITY" class="dark-field-input watch-input mono-num" value="25000" step="1000">
-            </div>
-            <div>
-              <label class="dark-field-label" for="NAME_CONTRACT_TYPE">Contract Type</label>
-              <select id="NAME_CONTRACT_TYPE" class="dark-field-input watch-input text-xs">
-                <option value="Cash loans">Cash loans</option>
-                <option value="Revolving loans">Revolving loans</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Demographics Grid -->
-          <div class="pt-2 border-t border-slate-800 space-y-3">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
-              <i data-lucide="user" class="w-4 h-4 text-indigo-400"></i>
-              Borrower Demographics & Stability
-            </h3>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-              <div>
-                <label class="dark-field-label" for="calc_age_years">Age (Years)</label>
-                <input type="number" id="calc_age_years" class="dark-field-input watch-input mono-num" value="45" min="18" max="75">
-              </div>
-              <div>
-                <label class="dark-field-label" for="calc_employed_years">Employment (Years)</label>
-                <input type="number" id="calc_employed_years" class="dark-field-input watch-input mono-num" value="8" min="0" max="50" step="0.5">
-              </div>
-              <div>
-                <label class="dark-field-label" for="NAME_EDUCATION_TYPE">Education Level</label>
-                <select id="NAME_EDUCATION_TYPE" class="dark-field-input watch-input text-xs">
-                  <option value="Higher education">Higher education</option>
-                  <option value="Secondary / secondary special">Secondary / special</option>
-                  <option value="Incomplete higher">Incomplete higher</option>
-                  <option value="Lower secondary">Lower secondary</option>
-                  <option value="Academic degree">Academic degree</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <!-- External Bureau Score (Top Predictive Signal) -->
-          <div class="pt-2 border-t border-slate-800 space-y-2">
-            <div class="flex justify-between items-center text-xs">
-              <span class="font-bold text-white flex items-center gap-1.5">
-                <i data-lucide="shield-check" class="w-4 h-4 text-indigo-400"></i>
-                External Bureau Score (EXT_SOURCE_2)
-              </span>
-              <input type="number" id="EXT_SOURCE_2" class="watch-input w-24 border border-indigo-500/40 rounded-lg px-2.5 py-1 text-xs text-right mono-num font-bold text-indigo-300 bg-indigo-500/10" value="0.65" step="0.01" min="0" max="1">
-            </div>
-
-            <input type="range" id="EXT_SOURCE_2_range" class="watch-range w-full" min="0" max="1" step="0.01" value="0.65">
-            
-            <div class="flex justify-between text-[10px] text-slate-400 font-medium">
-              <span>0.00 (Poor Rating)</span>
-              <span class="text-slate-300 font-semibold">0.50 (Median Benchmark)</span>
-              <span class="text-indigo-400 font-semibold">1.00 (Prime Rating)</span>
-            </div>
-          </div>
-
-          <!-- Collapsible Advanced Options -->
-          <div class="pt-2 border-t border-slate-800">
-            <a href="#" id="toggle-more-options" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold inline-flex items-center gap-1">
-              + Advanced Attributes (Car Age, Children, Recent Bureau Inquiries)
-            </a>
-
-            <div id="more-options-container" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 mt-2 border-t border-slate-800">
-              <div>
-                <label class="dark-field-label" for="OWN_CAR_AGE">Car Age (0 if none)</label>
-                <input type="number" id="OWN_CAR_AGE" class="dark-field-input watch-input mono-num" value="4" min="0">
-              </div>
-              <div>
-                <label class="dark-field-label" for="CNT_CHILDREN">Children Count</label>
-                <input type="number" id="CNT_CHILDREN" class="dark-field-input watch-input mono-num" value="0" min="0">
-              </div>
-              <div>
-                <label class="dark-field-label" for="AMT_REQ_CREDIT_BUREAU_YEAR">Inquiries (Past Year)</label>
-                <input type="number" id="AMT_REQ_CREDIT_BUREAU_YEAR" class="dark-field-input watch-input mono-num" value="1" min="0">
-              </div>
-            </div>
-          </div>
-
-          <!-- Action Buttons -->
-          <div class="pt-3 flex flex-wrap items-center gap-3">
-            <button id="btn-calculate" class="btn-glow-primary flex-1 py-3 text-sm font-bold shadow-lg">
-              <i data-lucide="play" class="w-4 h-4"></i>
-              <span>Recalculate Underwriting Assessment</span>
-            </button>
-            <button id="btn-reset" class="btn-glass py-3 px-5 text-xs font-medium">
-              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-              <span>Reset</span>
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Right Column: Sticky Underwriting Assessment Dossier (5 cols) -->
-      <div class="lg:col-span-5">
-        
-        <div class="card-dark p-6 sm:p-7 space-y-6 sticky top-20 border-slate-800 shadow-2xl">
+        <form id="prediction-form" class="saas-card overflow-hidden" onsubmit="event.preventDefault();">
           
-          <!-- Dossier Header -->
-          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div class="saas-card-header bg-slate-50/70">
             <div>
-              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Assessment Output</span>
-              <span class="text-xs font-bold text-white">Credit Risk Decision</span>
+              <h2 class="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                <i data-lucide="file-input" class="w-4 h-4 text-indigo-600"></i>
+                Borrower & Loan Feature Inputs
+              </h2>
+              <p class="text-xs text-slate-500 mt-0.5">Enter loan specifications and applicant attributes for LightGBM scoring</p>
             </div>
-            <span id="res-badge" class="inline-block px-3 py-1 rounded-full text-xs font-bold badge-status-low shadow-sm">
-              Low Risk
-            </span>
+            <button type="button" id="btn-reset-form" class="text-xs text-slate-500 hover:text-slate-800 flex items-center gap-1 font-medium">
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Reset
+            </button>
           </div>
 
-          <!-- Circular Risk Score Meter -->
-          <div class="text-center py-2">
-            <div class="gauge-container">
-              <svg class="gauge-svg" viewBox="0 0 100 100">
-                <circle class="gauge-bg" cx="50" cy="50" r="40"></circle>
-                <circle id="gauge-meter-circle" class="gauge-meter" cx="50" cy="50" r="40" stroke="#10b981" stroke-dasharray="251.2" stroke-dashoffset="246"></circle>
-              </svg>
-              <div class="gauge-center-text">
-                <div id="res-prob" class="text-3xl sm:text-4xl font-black mono-num text-white tracking-tight">2.1%</div>
-                <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Default Risk</div>
+          <div class="saas-card-body space-y-6">
+
+            <!-- Section 1: Financial & Loan Attributes -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
+                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="circle-dollar-sign" class="w-3.5 h-3.5 text-indigo-600"></i>
+                  1. Loan & Financial Terms
+                </span>
+                <span class="text-[11px] text-slate-400">Amounts in USD ($)</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Total Income -->
+                <div class="input-group">
+                  <label class="input-label" for="AMT_INCOME_TOTAL">
+                    <span>Annual Total Income</span>
+                    <span class="input-hint">AMT_INCOME_TOTAL</span>
+                  </label>
+                  <div class="input-wrapper">
+                    <span class="input-prefix">$</span>
+                    <input type="number" id="AMT_INCOME_TOTAL" class="saas-input has-prefix mono-num" value="180000" step="5000" min="10000" required>
+                  </div>
+                </div>
+
+                <!-- Loan Amount -->
+                <div class="input-group">
+                  <label class="input-label" for="AMT_CREDIT">
+                    <span>Credit / Loan Amount</span>
+                    <span class="input-hint">AMT_CREDIT</span>
+                  </label>
+                  <div class="input-wrapper">
+                    <span class="input-prefix">$</span>
+                    <input type="number" id="AMT_CREDIT" class="saas-input has-prefix mono-num" value="500000" step="10000" min="10000" required>
+                  </div>
+                </div>
+
+                <!-- Annuity -->
+                <div class="input-group">
+                  <label class="input-label" for="AMT_ANNUITY">
+                    <span>Annual Annuity Payment</span>
+                    <span class="input-hint">AMT_ANNUITY</span>
+                  </label>
+                  <div class="input-wrapper">
+                    <span class="input-prefix">$</span>
+                    <input type="number" id="AMT_ANNUITY" class="saas-input has-prefix mono-num" value="25000" step="1000" min="1000" required>
+                  </div>
+                </div>
+
+                <!-- Goods Price -->
+                <div class="input-group">
+                  <label class="input-label" for="AMT_GOODS_PRICE">
+                    <span>Goods Price (Collateral)</span>
+                    <span class="input-hint">AMT_GOODS_PRICE</span>
+                  </label>
+                  <div class="input-wrapper">
+                    <span class="input-prefix">$</span>
+                    <input type="number" id="AMT_GOODS_PRICE" class="saas-input has-prefix mono-num" value="500000" step="10000" min="0">
+                  </div>
+                </div>
+
+                <!-- Contract Type -->
+                <div class="input-group">
+                  <label class="input-label" for="NAME_CONTRACT_TYPE">Contract Type</label>
+                  <select id="NAME_CONTRACT_TYPE" class="saas-input">
+                    <option value="Cash loans">Cash loans</option>
+                    <option value="Revolving loans">Revolving loans</option>
+                  </select>
+                </div>
+
+                <!-- Income Type -->
+                <div class="input-group">
+                  <label class="input-label" for="NAME_INCOME_TYPE">Income Source / Employment Type</label>
+                  <select id="NAME_INCOME_TYPE" class="saas-input">
+                    <option value="Working">Working</option>
+                    <option value="Commercial associate">Commercial associate</option>
+                    <option value="State servant">State servant</option>
+                    <option value="Pensioner">Pensioner</option>
+                    <option value="Businessman">Businessman</option>
+                    <option value="Student">Student</option>
+                    <option value="Unemployed">Unemployed</option>
+                  </select>
+                </div>
               </div>
             </div>
+
+            <!-- Section 2: Borrower Demographics & Stability -->
+            <div class="space-y-3 pt-2">
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
+                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="user" class="w-3.5 h-3.5 text-indigo-600"></i>
+                  2. Borrower Demographics & Stability
+                </span>
+                <span class="text-[11px] text-slate-400">Personal Profile</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <!-- Age -->
+                <div class="input-group">
+                  <label class="input-label" for="calc_age_years">Age (Years)</label>
+                  <div class="input-wrapper">
+                    <input type="number" id="calc_age_years" class="saas-input has-suffix mono-num" value="45" min="18" max="75" required>
+                    <span class="input-suffix">yrs</span>
+                  </div>
+                </div>
+
+                <!-- Employment -->
+                <div class="input-group">
+                  <label class="input-label" for="calc_employed_years">Employment Duration</label>
+                  <div class="input-wrapper">
+                    <input type="number" id="calc_employed_years" class="saas-input has-suffix mono-num" value="8" min="0" max="50" step="0.5" required>
+                    <span class="input-suffix">yrs</span>
+                  </div>
+                </div>
+
+                <!-- Gender -->
+                <div class="input-group">
+                  <label class="input-label" for="CODE_GENDER">Gender</label>
+                  <select id="CODE_GENDER" class="saas-input">
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="XNA">XNA / Undisclosed</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
+                <!-- Education -->
+                <div class="input-group">
+                  <label class="input-label" for="NAME_EDUCATION_TYPE">Education Level</label>
+                  <select id="NAME_EDUCATION_TYPE" class="saas-input">
+                    <option value="Higher education">Higher education</option>
+                    <option value="Secondary / secondary special">Secondary / Special</option>
+                    <option value="Incomplete higher">Incomplete higher</option>
+                    <option value="Lower secondary">Lower secondary</option>
+                    <option value="Academic degree">Academic degree</option>
+                  </select>
+                </div>
+
+                <!-- Family Status -->
+                <div class="input-group">
+                  <label class="input-label" for="NAME_FAMILY_STATUS">Family Status</label>
+                  <select id="NAME_FAMILY_STATUS" class="saas-input">
+                    <option value="Married">Married</option>
+                    <option value="Single / not married">Single / not married</option>
+                    <option value="Civil marriage">Civil marriage</option>
+                    <option value="Separated">Separated</option>
+                    <option value="Widow">Widow</option>
+                  </select>
+                </div>
+
+                <!-- Housing Type -->
+                <div class="input-group">
+                  <label class="input-label" for="NAME_HOUSING_TYPE">Housing Situation</label>
+                  <select id="NAME_HOUSING_TYPE" class="saas-input">
+                    <option value="House / apartment">House / apartment</option>
+                    <option value="With parents">With parents</option>
+                    <option value="Municipal apartment">Municipal apartment</option>
+                    <option value="Rented apartment">Rented apartment</option>
+                    <option value="Office apartment">Office apartment</option>
+                    <option value="Co-op apartment">Co-op apartment</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: Credit Bureau Ratings (EXT_SOURCE_1, 2, 3) -->
+            <div class="space-y-3 pt-2">
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
+                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="shield-check" class="w-3.5 h-3.5 text-indigo-600"></i>
+                  3. External Bureau Ratings (Top Predictors)
+                </span>
+                <span class="text-[11px] text-slate-400">Scale: 0.00 (Poor) &ndash; 1.00 (Prime)</span>
+              </div>
+
+              <!-- EXT_SOURCE_2 (Primary Feature) -->
+              <div class="p-3.5 rounded-lg bg-indigo-50/40 border border-indigo-100 space-y-2">
+                <div class="flex items-center justify-between">
+                  <label class="text-xs font-semibold text-slate-800 flex items-center gap-1" for="EXT_SOURCE_2">
+                    <span>Primary External Rating (EXT_SOURCE_2)</span>
+                    <span class="text-[10px] font-bold text-indigo-700 bg-indigo-100 px-1.5 py-0.5 rounded">Highest Importance</span>
+                  </label>
+                  <div class="flex items-center gap-1">
+                    <input type="number" id="EXT_SOURCE_2" class="saas-input h-7 w-20 text-xs font-mono font-bold text-indigo-700 text-right py-0 px-2" value="0.65" min="0" max="1" step="0.01">
+                  </div>
+                </div>
+                <input type="range" id="EXT_SOURCE_2_range" class="saas-range w-full" min="0" max="1" step="0.01" value="0.65">
+                <div class="flex justify-between text-[10px] text-slate-400 font-medium">
+                  <span>0.00 (Subprime / Default Risk)</span>
+                  <span class="text-slate-600 font-semibold">0.50 (Market Benchmark)</span>
+                  <span class="text-indigo-600 font-semibold">1.00 (Super-Prime)</span>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="input-group">
+                  <label class="input-label" for="EXT_SOURCE_1">
+                    <span>External Rating 1 (EXT_SOURCE_1)</span>
+                    <span class="input-hint">0.0 - 1.0</span>
+                  </label>
+                  <input type="number" id="EXT_SOURCE_1" class="saas-input mono-num" value="0.55" min="0" max="1" step="0.01">
+                </div>
+
+                <div class="input-group">
+                  <label class="input-label" for="EXT_SOURCE_3">
+                    <span>External Rating 3 (EXT_SOURCE_3)</span>
+                    <span class="input-hint">0.0 - 1.0</span>
+                  </label>
+                  <input type="number" id="EXT_SOURCE_3" class="saas-input mono-num" value="0.58" min="0" max="1" step="0.01">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Assets & Additional Risk Attributes -->
+            <div class="space-y-3 pt-2">
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-100">
+                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                  <i data-lucide="layers" class="w-3.5 h-3.5 text-indigo-600"></i>
+                  4. Household Assets & Bureau Inquiries
+                </span>
+                <span class="text-[11px] text-slate-400">Additional Attributes</span>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <!-- Car Age -->
+                <div class="input-group">
+                  <label class="input-label" for="OWN_CAR_AGE">Car Age (Yrs)</label>
+                  <input type="number" id="OWN_CAR_AGE" class="saas-input mono-num" value="4" min="0" placeholder="0 if none">
+                </div>
+
+                <!-- Children -->
+                <div class="input-group">
+                  <label class="input-label" for="CNT_CHILDREN">Children</label>
+                  <input type="number" id="CNT_CHILDREN" class="saas-input mono-num" value="0" min="0">
+                </div>
+
+                <!-- Family Members -->
+                <div class="input-group">
+                  <label class="input-label" for="CNT_FAM_MEMBERS">Family Size</label>
+                  <input type="number" id="CNT_FAM_MEMBERS" class="saas-input mono-num" value="2" min="1">
+                </div>
+
+                <!-- Inquiries Year -->
+                <div class="input-group">
+                  <label class="input-label" for="AMT_REQ_CREDIT_BUREAU_YEAR">Inquiries (1Y)</label>
+                  <input type="number" id="AMT_REQ_CREDIT_BUREAU_YEAR" class="saas-input mono-num" value="1" min="0">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                <!-- Occupation Type -->
+                <div class="input-group">
+                  <label class="input-label" for="OCCUPATION_TYPE">Occupation Type</label>
+                  <select id="OCCUPATION_TYPE" class="saas-input">
+                    <option value="Managers">Managers</option>
+                    <option value="Laborers">Laborers</option>
+                    <option value="Core staff">Core staff</option>
+                    <option value="Sales staff">Sales staff</option>
+                    <option value="High skill tech staff">High skill tech staff</option>
+                    <option value="Accountants">Accountants</option>
+                    <option value="Drivers">Drivers</option>
+                    <option value="Medicine staff">Medicine staff</option>
+                    <option value="Security staff">Security staff</option>
+                    <option value="IT staff">IT staff</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <!-- Organization Type -->
+                <div class="input-group">
+                  <label class="input-label" for="ORGANIZATION_TYPE">Organization Type</label>
+                  <select id="ORGANIZATION_TYPE" class="saas-input">
+                    <option value="Business Entity Type 3">Business Entity Type 3</option>
+                    <option value="Self-employed">Self-employed</option>
+                    <option value="Bank">Bank / Financial Services</option>
+                    <option value="Government">Government / Public Sector</option>
+                    <option value="Medicine">Medicine / Healthcare</option>
+                    <option value="Trade: type 7">Trade & Retail</option>
+                    <option value="Industry: type 1">Manufacturing & Industry</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button Bar -->
+            <div class="pt-4 border-t border-slate-200 flex items-center justify-between gap-4">
+              <button type="submit" id="btn-run-prediction" class="btn-primary flex-1 h-11 text-sm font-semibold shadow-sm">
+                <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+                <span id="btn-predict-text">Run Prediction</span>
+              </button>
+              <div class="hidden sm:block text-right">
+                <span class="text-[11px] text-slate-400 font-mono block">LightGBM C-Core</span>
+                <span class="text-[11px] text-slate-500 font-medium">Latency &lt; 25ms</span>
+              </div>
+            </div>
+
           </div>
 
-          <!-- Spectrum Meter Bar -->
-          <div class="space-y-1.5">
-            <div class="meter-track">
-              <div id="res-meter-fill" class="meter-fill" style="width: 2.1%; background-color: #10b981;"></div>
-            </div>
-            <div class="flex justify-between text-[10px] text-slate-400 font-medium">
-              <span>0% Low Risk</span>
-              <span class="text-slate-200 font-bold">8% Market Benchmark</span>
-              <span>25%+ High Risk</span>
-            </div>
-          </div>
+        </form>
 
-          <!-- Financial Ratio Metrics -->
-          <div class="grid grid-cols-3 gap-2.5 text-center p-3 sm:p-4 bg-black/40 rounded-xl border border-white/5">
-            <div>
-              <div class="text-[10px] text-slate-400 font-bold uppercase">DTI Ratio</div>
-              <div id="res-dti" class="text-sm sm:text-base mono-num font-black text-white mt-0.5">13.9%</div>
-            </div>
-            <div>
-              <div class="text-[10px] text-slate-400 font-bold uppercase">Credit/Inc</div>
-              <div id="res-credit-income" class="text-sm sm:text-base mono-num font-black text-white mt-0.5">2.8x</div>
-            </div>
-            <div>
-              <div class="text-[10px] text-slate-400 font-bold uppercase">Loan Term</div>
-              <div id="res-term" class="text-sm sm:text-base mono-num font-black text-white mt-0.5">20.0 mos</div>
-            </div>
-          </div>
+      </section>
 
-          <!-- Key Decision Drivers -->
-          <div class="space-y-2">
-            <div class="text-[11px] font-bold text-slate-300 uppercase tracking-wider flex items-center justify-between">
-              <span class="flex items-center gap-1.5">
-                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-indigo-400"></i>
-                Key Decision Drivers
+      <!-- RIGHT COLUMN: Dynamic Results & Underwriting Intelligence (5 cols) -->
+      <section class="lg:col-span-5 space-y-5">
+        
+        <!-- Result Panel Card (Sticky for comfortable inspection) -->
+        <div class="saas-card sticky top-20 overflow-hidden" id="prediction-result-panel">
+          
+          <!-- Card Header with Tier Status -->
+          <div class="saas-card-header bg-slate-50/70">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Machine Learning Output</span>
+              <h3 class="text-xs font-bold text-slate-800">Underwriting Assessment Result</h3>
+            </div>
+            <div id="res-badge-container">
+              <span id="res-badge" class="badge-status badge-low">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span>Low Risk</span>
               </span>
-              <span class="text-[10px] text-slate-400 font-normal">Ranked by Impact</span>
             </div>
-            <ul id="res-factors" class="space-y-2">
-              <!-- Dynamically populated -->
-            </ul>
           </div>
 
-          <!-- Action Bar: Copy Summary -->
-          <div class="pt-2 border-t border-slate-800 flex items-center justify-between">
-            <button id="btn-copy-summary" class="text-xs text-indigo-400 hover:text-indigo-300 font-medium inline-flex items-center gap-1.5">
-              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-              <span id="copy-btn-text">Copy Risk Assessment Summary</span>
-            </button>
-            <span class="text-[10px] text-slate-500 font-mono">ID: #GCI-RISK</span>
+          <div class="saas-card-body space-y-6">
+
+            <!-- Primary Probability KPI -->
+            <div class="text-center py-2">
+              <div class="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-1">
+                Estimated Probability of Default
+              </div>
+              <div class="flex items-baseline justify-center gap-1.5">
+                <span id="res-prob-pct" class="text-5xl font-extrabold mono-num text-slate-900 tracking-tight">
+                  3.09%
+                </span>
+                <span class="text-xs text-slate-400 font-mono font-medium" id="res-prob-dec">(p = 0.0309)</span>
+              </div>
+
+              <!-- Recommendation Pill -->
+              <div class="mt-3">
+                <span id="res-recommendation" class="inline-flex items-center px-3 py-1 rounded-md text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  Approved (Standard/Prime Terms)
+                </span>
+              </div>
+              <p id="res-recommendation-desc" class="text-xs text-slate-500 mt-1.5 max-w-sm mx-auto leading-relaxed">
+                Low statistical default risk. Candidate comfortably meets standard prime credit criteria.
+              </p>
+            </div>
+
+            <!-- Risk Distribution Spectrum Bar -->
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-semibold text-slate-700">Risk Distribution Scale</span>
+                <span class="text-slate-400 font-mono text-[11px]" id="res-spectrum-label">Prime Range</span>
+              </div>
+              <div class="risk-meter-bar">
+                <div id="res-meter-fill" class="risk-meter-fill bg-emerald-500" style="width: 3.09%;"></div>
+              </div>
+              <div class="flex justify-between text-[10px] text-slate-400 font-medium">
+                <span>0% Prime</span>
+                <span class="text-slate-600 font-semibold">8.07% Market Baseline</span>
+                <span>25%+ Declined</span>
+              </div>
+            </div>
+
+            <!-- Key Financial Underwriting Ratios -->
+            <div class="space-y-2">
+              <div class="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                Financial Underwriting Indicators
+              </div>
+
+              <div class="grid grid-cols-3 gap-2 text-center p-3 rounded-lg bg-slate-50 border border-slate-200">
+                <div>
+                  <div class="text-[10px] text-slate-400 uppercase font-semibold">DTI Ratio</div>
+                  <div id="res-dti" class="text-sm font-bold text-slate-900 mono-num mt-0.5">15.0%</div>
+                </div>
+                <div>
+                  <div class="text-[10px] text-slate-400 uppercase font-semibold">Loan / Inc</div>
+                  <div id="res-lti" class="text-sm font-bold text-slate-900 mono-num mt-0.5">3.0x</div>
+                </div>
+                <div>
+                  <div class="text-[10px] text-slate-400 uppercase font-semibold">Term</div>
+                  <div id="res-term" class="text-sm font-bold text-slate-900 mono-num mt-0.5">20.0 mos</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Decision Factor Analysis (Strengths vs. Risk Drivers) -->
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-slate-800 uppercase tracking-wider">Decision Drivers & Risk Factors</span>
+                <span class="text-[11px] text-slate-400">LightGBM Impact</span>
+              </div>
+
+              <div id="res-factors-container" class="space-y-2">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Result Actions Bar (Copy & Export) -->
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+              <button type="button" id="btn-copy-assessment" class="btn-secondary h-8 text-xs px-2.5">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                <span id="copy-btn-label">Copy Report</span>
+              </button>
+              <button type="button" id="btn-export-json" class="btn-secondary h-8 text-xs px-2.5">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Export JSON</span>
+              </button>
+              <span class="text-[11px] text-slate-400 font-mono" id="active-applicant-indicator">Simulation</span>
+            </div>
+
           </div>
 
         </div>
 
-      </div>
+        <!-- Session History Log (Stores recent predictions) -->
+        <div class="saas-card overflow-hidden">
+          <div class="saas-card-header bg-slate-50/70">
+            <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+              <i data-lucide="history" class="w-3.5 h-3.5 text-slate-500"></i>
+              Session Prediction History
+            </span>
+            <button id="btn-clear-history" class="text-[11px] text-slate-400 hover:text-slate-700">Clear</button>
+          </div>
+          <div id="history-container" class="divide-y divide-slate-100 text-xs max-h-48 overflow-y-auto">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+      </section>
 
     </div>
 
   </main>
 
-  <!-- Clean Footer -->
-  <footer class="border-t border-slate-800 bg-black/40 py-6 text-xs text-slate-500 mt-12 mb-16 md:mb-0">
-    <div class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-between gap-3">
+  <!-- Clean Minimal Enterprise Footer -->
+  <footer class="border-t border-slate-200 bg-white py-4 text-xs text-slate-500 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-2">
-        <span class="font-bold text-slate-300">GCI Global 2025</span>
-        <span>&bull; Home Credit Default Risk Model Prediction</span>
+        <span class="font-bold text-slate-700">Home Credit Risk AI</span>
+        <span>&bull; LightGBM Production Pipeline (ROC-AUC: 0.7554)</span>
       </div>
-      <div class="flex items-center gap-4 text-slate-400">
-        <a href="index.html" onclick="window.location.href='index.html'" class="hover:text-indigo-400 font-medium">&larr; Back to Hub Overview</a>
+      <div class="flex items-center gap-4 text-slate-400 text-[11px]">
+        <span>Model: lgbm_default_risk.joblib</span>
         <span>&bull;</span>
-        <a href="index.html#submissions" class="hover:text-indigo-400 font-medium">Submissions</a>
+        <span>44 Engineered Features</span>
+        <span>&bull;</span>
+        <span>171,202 Training Records</span>
       </div>
     </div>
   </footer>
-
-  <!-- Mobile Bottom Navigation Dock (Phones & Small Tablets) -->
-  <div class="mobile-dock">
-    <a href="index.html" onclick="window.location.href='index.html'" class="mobile-dock-btn">
-      <i data-lucide="layout-grid" class="w-5 h-5"></i>
-      <span>Hub</span>
-    </a>
-    <a href="predict.html" class="mobile-dock-btn active pred-cta">
-      <i data-lucide="sparkles" class="w-5 h-5"></i>
-      <span>Predict</span>
-    </a>
-    <a href="index.html#submissions" onclick="window.location.href='index.html#submissions'" class="mobile-dock-btn">
-      <i data-lucide="table-2" class="w-5 h-5"></i>
-      <span>Submissions</span>
-    </a>
-  </div>
 
   <!-- Scripts -->
   <script src="/static/js/app.js"></script>
