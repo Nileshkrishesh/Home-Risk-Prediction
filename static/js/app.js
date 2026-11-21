@@ -57,16 +57,16 @@ async function checkBackendHealth() {
     const resp = await fetch(getApiUrl('/api/health'));
     if (resp.ok) {
       if (badgeEl) {
-        badgeEl.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200';
-        badgeEl.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> API Online';
+        badgeEl.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-500/15 text-emerald-400 border border-emerald-500/30';
+        badgeEl.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> API Online';
       }
     } else {
       throw new Error('API warming up');
     }
   } catch (err) {
     if (badgeEl) {
-      badgeEl.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-amber-50 text-amber-700 border border-amber-200';
-      badgeEl.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span> Waking API (~25s)...';
+      badgeEl.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-amber-500/15 text-amber-400 border border-amber-500/30';
+      badgeEl.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> Waking API (~25s)...';
       setTimeout(checkBackendHealth, 8000);
     }
   }
@@ -195,7 +195,7 @@ function renderResult(res) {
     else if (prob >= 15) badgeClass = 'badge-status-elevated';
     else if (prob >= 8) badgeClass = 'badge-status-moderate';
 
-    badgeEl.className = `inline-block px-3 py-1 rounded-full text-xs font-semibold ${badgeClass}`;
+    badgeEl.className = `inline-block px-3 py-1 rounded-full text-xs font-bold ${badgeClass}`;
     badgeEl.textContent = `${res.risk_tier} — ${res.recommendation}`;
   }
 
@@ -219,15 +219,15 @@ function renderResult(res) {
     } else {
       items.forEach(item => {
         const li = document.createElement('li');
-        li.className = 'text-xs text-slate-700 flex items-start gap-2 bg-slate-50 p-2 rounded-lg border border-slate-100';
+        li.className = 'text-xs text-slate-300 flex items-start gap-2.5 bg-black/40 p-2.5 rounded-xl border border-white/5';
         const icon = item.positive 
-          ? '<span class="text-emerald-600 font-bold text-sm leading-none">&check;</span>' 
-          : '<span class="text-amber-600 font-bold text-sm leading-none">&excl;</span>';
+          ? '<span class="text-emerald-400 font-black text-sm leading-none">&check;</span>' 
+          : '<span class="text-amber-400 font-black text-sm leading-none">&excl;</span>';
         li.innerHTML = `
           ${icon}
           <div>
-            <span class="font-semibold text-slate-900">${item.factor}:</span>
-            <span class="text-slate-600 ml-1">${item.impact} (${item.value})</span>
+            <span class="font-bold text-white">${item.factor}:</span>
+            <span class="text-slate-300 ml-1">${item.impact} (${item.value})</span>
           </div>
         `;
         factorsList.appendChild(li);
@@ -406,7 +406,7 @@ function showSubmissionComparison(preds, live) {
   compList.innerHTML = '';
   // Live Active LightGBM
   compList.innerHTML += `
-    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-xs font-mono font-bold shadow-sm">
+    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-xs font-mono font-bold shadow-md">
       <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
       Active LightGBM: ${live.probability_percent.toFixed(1)}%
     </span>
@@ -415,9 +415,9 @@ function showSubmissionComparison(preds, live) {
   // Output Submission files
   Object.keys(preds || {}).forEach(k => {
     compList.innerHTML += `
-      <span class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white text-slate-800 border border-indigo-200 text-xs font-mono font-medium shadow-xs">
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-900/90 text-slate-200 border border-indigo-500/30 text-xs font-mono font-medium shadow-xs">
         <span class="text-slate-400">${k}:</span>
-        <strong>${preds[k]}%</strong>
+        <strong class="text-white">${preds[k]}%</strong>
       </span>
     `;
   });
@@ -509,6 +509,7 @@ function setupHubSearch() {
       const link = document.getElementById('hub-preview-link');
       if (link) {
         link.href = `predict.html?id=${id}`;
+        link.onclick = () => { window.location.href = `predict.html?id=${id}`; };
       }
 
       if (preview) preview.classList.remove('hidden');
@@ -553,20 +554,20 @@ async function loadSubmissions() {
       const isFinal = s.filename === 'submissionFinal.csv';
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td class="font-bold text-slate-900 flex items-center gap-2">
+        <td class="font-bold text-white flex items-center gap-2">
           <span>${s.filename}</span>
-          ${isFinal ? '<span class="text-[10px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-full">Final Benchmark</span>' : ''}
+          ${isFinal ? '<span class="text-[10px] font-bold text-indigo-300 bg-indigo-500/20 border border-indigo-500/40 px-2 py-0.5 rounded-full">Final Benchmark</span>' : ''}
         </td>
-        <td class="text-xs text-slate-500 mono-num">${s.rows.toLocaleString()}</td>
-        <td class="mono-num text-xs font-bold text-slate-900">${s.mean_pct}%</td>
-        <td class="mono-num text-xs text-slate-600">${s.median_pct}%</td>
+        <td class="text-xs text-slate-400 mono-num">${s.rows.toLocaleString()}</td>
+        <td class="mono-num text-xs font-bold text-white">${s.mean_pct}%</td>
+        <td class="mono-num text-xs text-slate-400">${s.median_pct}%</td>
         <td>
-          <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono bg-slate-100 text-slate-700 border border-slate-200">
+          <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-slate-300 border border-slate-700">
             P75: ${s.p75_pct}%
           </span>
         </td>
         <td>
-          <a href="${getApiUrl('/api/download-submission?name=' + s.filename)}" class="text-xs text-indigo-600 hover:text-indigo-800 font-bold inline-flex items-center gap-1">
+          <a href="${getApiUrl('/api/download-submission?name=' + s.filename)}" class="text-xs text-indigo-400 hover:text-indigo-300 font-bold inline-flex items-center gap-1">
             Download CSV &rarr;
           </a>
         </td>
